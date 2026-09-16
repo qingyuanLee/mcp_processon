@@ -201,6 +201,41 @@ class ProcessOnClient:
         """
         return self._call_remote_tool("generate_chart", {"prompt": prompt})
 
+    def generate_diagram_dsl(self, prompt: str) -> str:
+        """Ask ProcessOn to turn an intent into Mermaid DSL (a draft).
+
+        The returned Mermaid text is what the LLM can then edit/iterate itself.
+        """
+        result = self._call_remote_tool("generate_diagram_dsl", {"prompt": prompt})
+        for key in ("mermaid", "dsl", "content", "code", "definition"):
+            v = result.get(key)
+            if isinstance(v, str) and v.strip():
+                return v.strip()
+        return json.dumps(result, ensure_ascii=False, indent=2)
+
+    def render_mermaid(
+        self,
+        mermaid_code: str,
+        title: str = "",
+        diagram_type: str = "",
+    ) -> Dict[str, Any]:
+        """Render a self-authored Mermaid definition into an editable ProcessOn diagram.
+
+        The LLM authors/iterates the Mermaid; ProcessOn only renders it verbatim.
+        Returns imgUrl (preview) + visitUrl (editable link).
+        """
+        prompt = (
+            "Render the following Mermaid diagram DEFINITION VERBATIM into an "
+            "editable ProcessOn diagram. Do NOT redesign, rename, add, or remove "
+            "any nodes or edges — render exactly this Mermaid code as-is. "
+        )
+        if diagram_type:
+            prompt += f"Diagram type: {diagram_type}. "
+        if title:
+            prompt += f"Title: {title}. "
+        prompt += "\n\nMermaid code:\n```mermaid\n" + mermaid_code.strip() + "\n```"
+        return self._call_remote_tool("generate_chart", {"prompt": prompt})
+
     def md_to_mindmap(
         self,
         title: str,

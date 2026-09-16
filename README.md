@@ -62,10 +62,26 @@ processon-mcp -v                           # debug logging
 | Tool | Description |
 |------|-------------|
 | `processon_whoami` | Show current ProcessOn auth status |
-| `processon_generate_chart` | Generate an editable diagram from a natural-language prompt |
+| `processon_design_diagram` | Turn an idea into a Mermaid diagram definition (first draft / planning) |
+| `processon_render_mermaid` | Render a Mermaid you authored into an editable ProcessOn diagram |
+| `processon_generate_chart` | One-shot: natural-language prompt -> editable diagram |
 | `processon_md_to_mindmap` | Convert Markdown into an editable mindmap |
 | `processon_cache_info` | Show cache backend info |
 | `processon_cache_clear` | Clear cached data |
+
+### LLM-led diagramming workflow (0 -> 1 -> 100)
+
+ProcessOn has no low-level "add node / add edge" editing API, so the LLM owns
+the diagram through **Mermaid source** and ProcessOn only renders it:
+
+1. `processon_design_diagram` — get a Mermaid skeleton for an idea.
+2. The LLM edits the Mermaid directly (add/remove nodes, edges, labels).
+3. `processon_render_mermaid` — render the edited Mermaid into a professional
+   editable online chart; get preview image + editable link.
+4. Repeat 2–3 to iterate toward the final diagram.
+
+One Mermaid grammar covers flowcharts, architecture / network-deployment,
+mindmaps, sequence, ER, class, timeline and C4 diagrams.
 
 ### MCP Resources
 
