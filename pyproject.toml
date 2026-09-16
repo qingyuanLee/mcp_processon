@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "processon-mcp"
+version = "1.0.0"
+description = "ProcessOn MCP Server — generate editable online diagrams (flowcharts, mindmaps, architecture diagrams, UML) via Model Context Protocol"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "processon-mcp contributors" }]
+keywords = ["mcp", "processon", "diagram", "flowchart", "mindmap", "ai-agent"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    "mcp[cli]>=2.1.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+redis = ["redis>=5.0.0"]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[project.scripts]
+processon-mcp = "processon_mcp.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/processon_mcp"]
