@@ -547,6 +547,18 @@ class ProcessOnClient:
                 "content": {"theme": {}, "update": update},
                 "pageId": page_id}
 
+    def _update_page_message(self, colors: Dict[str, str], page_id: str,
+                             width: int = 1200, height: int = 800) -> Dict[str, Any]:
+        """Set page background + hide grid (captured from the web app)."""
+        attrs = {"padding": 20, "backgroundColor": colors["page"],
+                 "orientation": "portrait", "gridSize": 15, "width": width,
+                 "showGrid": False, "lineJumps": False, "height": height}
+        return {"action": "updatePage",
+                "content": {"page": {**attrs, "backgroundColor": "transparent",
+                                     "showGrid": True},
+                            "update": attrs},
+                "pageId": page_id}
+
     def draw_flowchart(self, chart_id: str, page_id: str,
                        nodes: list, edges: list,
                        theme: str = "") -> Dict[str, Any]:
@@ -556,8 +568,8 @@ class ProcessOnClient:
                  "x"?: float, "y"?: float}]
         edges: [{"from": node_id, "to": node_id, "label"?: str}]
         theme: optional preset name — techblue / cleanemerald / warmorange /
-               slatepurple. Colours shapes + applies a page theme (replaces the
-               paid ProcessOn "AI style optimize"). Empty = plain default.
+               slatepurple. Colours shapes, hides the grid, sets a page background
+               (replaces the paid ProcessOn "AI style optimize"). Empty = default.
         """
         colors = self.THEMES.get(theme) if theme else None
         placed: Dict[str, Dict[str, Any]] = {}
@@ -581,6 +593,7 @@ class ProcessOnClient:
         content = shapes + links
         messages = [{"action": "create", "content": content, "pageId": page_id}]
         if colors:
+            messages.append(self._update_page_message(colors, page_id))
             messages.append(self._set_theme_message(colors, page_id))
         msg = [{"action": "command", "messages": messages,
                 "name": "", "pageId": page_id}]
