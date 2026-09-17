@@ -459,14 +459,17 @@ def processon_make_mindmap(
         nodes:    Root's direct children as a recursive tree. Each node is
                   {"text": "...", "children": [...],
                    "summary": "optional summary over this node's children",
-                   "boundary": "optional frame label around this node"}.
+                   "boundary": "optional frame label around this node",
+                   "links": [{"to": "another node's text", "label": "..."}]}.
                   Nest "children" as deep as you need.
 
     Example:
         title="项目架构"
         nodes=[{"text":"认证体系","summary":"两套认证","boundary":"基础",
                 "children":[{"text":"sk-po token"},{"text":"账号密码"}]},
-               {"text":"画图能力","children":[{"text":"流程图"},{"text":"思维导图"}]}]
+               {"text":"画图能力",
+                "children":[{"text":"流程图"},
+                             {"text":"思维导图","links":[{"to":"sk-po token","label":"共用"}]}]}]
     """
     client = _get_client()
     try:

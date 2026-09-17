@@ -692,10 +692,12 @@ class ProcessOnClient:
 
         nodes: [{"text": str, "children": [...],
                  "summary": "optional summary over this node's children",
-                 "boundary": "optional boundary label around this node"}]
+                 "boundary": "optional boundary label around this node",
+                 "links": [{"to": "another node's text", "label": "..."}]}]
         """
         actions = [{"action": "changeTitle", "title": root_title, "editorVersion": "V2"}]
         text_to_id: Dict[str, str] = {}
+        deferred_links: list = []
 
         def walk(children: list, parent_id: str, depth: int,
                  sibling_counter: dict) -> None:
@@ -734,8 +736,31 @@ class ProcessOnClient:
                                      "children": [], "id": bid,
                                      "boundary": True}]},
                         "pageId": page_id})
+                # cross-node links (resolved after the tree exists)
+                for lk in ch.get("links", []):
+                    deferred_links.append((nid, lk))
 
         walk(nodes, "root", 0, {})
+
+        # resolve cross-node connections by target text; use full template
+        # (start/end anchors + angles, real coords zeroed — client re-lays out).
+        for from_id, lk in deferred_links:
+            to_id = text_to_id.get(lk.get("to", ""))
+            if not to_id:
+                continue
+            cid = str(uuid.uuid4())
+            conn = {
+                "from": from_id, "to": to_id,
+                "end": {"x": "0.7", "y": "0.0", "index": 2},
+                "startAngle": 135.8793622579657, "endAngle": 315.8793622579657,
+                "points": [], "styles": {}, "label": lk.get("label", ""), "pts": [],
+                "id": cid,
+                "start": {"x": "0.2", "y": "1.0", "index": 4},
+                "realEnd": {"x": 0, "y": 0}, "realStart": {"x": 0, "y": 0},
+            }
+            actions.append({"action": "addConnection",
+                            "content": {"content": [conn]},
+                            "pageId": page_id, "editorVersion": "V2"})
         result = self._web_call(
             "POST",
             f"/api/personal/mindmap/canvas/msg?mlfffid={chart_id}&mlffcid={chart_id}",
