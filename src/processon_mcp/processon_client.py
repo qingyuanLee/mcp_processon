@@ -406,6 +406,30 @@ class ProcessOnClient:
                               params={"folderId": folder_id, "sidx": "lastModify",
                                       "sort": "desc", "pageSize": 50, "page": 1})
 
+    def ensure_folder_path(self, path: str, root_id: str = "root") -> str:
+        """Resolve a /-separated folder path, creating each missing segment.
+
+        Idempotent: reuses an existing same-named child folder instead of
+        creating duplicates (ProcessOn allows duplicate names, so we must
+        check list_files ourselves). Returns the deepest folderId.
+        """
+        current = root_id
+        for seg in [s for s in path.split("/") if s]:
+            listing = self.list_files(current)
+            existing = ""
+            for f in (listing.get("folders") or listing.get("children")
+                      or listing.get("data", {}).get("folders") or []):
+                if f.get("title") == seg or f.get("name") == seg:
+                    existing = f.get("folderId") or f.get("id") or ""
+                    break
+            if existing:
+                current = existing
+            else:
+                created = self.create_folder(seg, parent_id=current)
+                current = created.get("folderId") or created.get("id")
+        return current
+
+
     def create_chart(self, title: str, folder_id: str = "root",
                      category: str = "flowbase") -> Dict[str, Any]:
         data = self._web_call("POST", "/api/personal/diagraming/create",
