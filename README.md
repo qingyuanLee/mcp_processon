@@ -33,8 +33,11 @@ The output is always a **live, editable online diagram** — not a screenshot.
   - `mind_free` — real mindmaps with auto-colored branches.
 - **Mindmap annotations** — `summary` (概要), `boundary` (外框), and
   cross-node `links` (跨节点连线), all verified end-to-end.
-- **Full file management** — create folders, list files, create/rename charts
-  in "My Files", via account login (JWT, auto re-auth on 401/408).
+- **Full file management** — create folders (idempotent path), list files,
+  create/rename charts, **move** charts/folders, **delete to trash**. Building
+  blocks are idempotent: `ensure_folder_path` reuses same-named folders,
+  `ensure_chart` overwrites a same-named chart (delete + recreate), so rerunning
+  never spawns duplicates. Via account login (JWT, auto re-auth on 401/408).
 - **Dual auth** — `sk-po-...` token for the AI surface, account+password for
   the personal file surface.
 - **Standard MCP** — tools over stdio (default) or Streamable HTTP, pluggable
@@ -74,6 +77,7 @@ processon-mcp --transport http --port 3100
 | `processon_create_folder` / `processon_list_files` | Organize "My Files" |
 | `processon_create_chart` | Create an empty editable chart (`flowbase` / `outline` / `mind_free` / `markdown`) |
 | `processon_rename_chart` | Rename a chart |
+| `processon_move_file` / `processon_delete_chart` | Move charts/folders, delete chart to trash |
 | `processon_draw_flowchart` | **LLM draws native shapes + edges** into a chart, with a theme |
 | `processon_draw_mindmap` | Outline-style mind notes |
 | `processon_make_mindmap` | **Real mindmap** with colored branches + summary / boundary / links |
