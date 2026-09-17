@@ -351,7 +351,48 @@ def processon_create_chart(
     chart_id = chart.get("chartId")
     return (f"已在我的文件创建图表：{chart.get('title')}\n"
             f"chartId={chart_id}\n"
+            f"pageId={chart.get('definitionId')}\n"
             f"打开：{client.WEB_BASE}/diagraming/{chart_id}")
+
+
+@mcp.tool()
+def processon_draw_flowchart(
+    chart_id: str,
+    page_id: str,
+    nodes: list,
+    edges: list,
+) -> str:
+    """Draw a flowchart DIRECTLY into an existing ProcessOn chart in "我的文件".
+
+    This is the LLM-authoring step: you describe the nodes and edges and they
+    are rendered as native, editable ProcessOn shapes (not a flat image).
+    First create the chart with processon_create_chart (it returns chartId and
+    pageId=definitionId), then call this to populate it.
+
+    Args:
+        chart_id: Target chart id (from processon_create_chart).
+        page_id:  Target page id = the chart's definitionId (from create_chart).
+        nodes: List of nodes, each {"id": str, "label": str,
+               "shape": "rectangle"|"decision"|"terminator",
+               "x"?: float, "y"?: float}. Omit x/y for automatic vertical layout.
+        edges: List of edges, each {"from": <node id>, "to": <node id>,
+               "label"?: str}. Draws a downward arrow between them.
+
+    Example:
+        nodes=[{"id":"a","label":"开始","shape":"terminator"},
+               {"id":"b","label":"校验登录","shape":"decision"},
+               {"id":"c","label":"查询数据库","shape":"rectangle"}]
+        edges=[{"from":"a","to":"b"},{"from":"b","to":"c","label":"通过"}]
+    """
+    client = _get_client()
+    try:
+        data = client.draw_flowchart(chart_id, page_id, nodes, edges)
+    except ProcessOnAuthError as e:
+        return f"认证失败：{e.msg}。请配置 PROCESSON_ACCOUNT / PROCESSON_PASSWORD。"
+    except ProcessOnError as e:
+        return f"画图失败：{e.msg}"
+    return (f"已向图表写入 {len(nodes)} 个节点、{len(edges)} 条连线。\n"
+            f"打开查看：{client.WEB_BASE}/diagraming/{chart_id}")
 
 
 @mcp.tool()

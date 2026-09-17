@@ -415,3 +415,126 @@ class ProcessOnClient:
             data={"msgStr": msg, "canvasId": chart_id, "chartId": chart_id,
                   "ignore": "msgStr", "msgversion": ""},
         )
+
+    # ------------------------------------------------------------------
+    # Canvas drawing (write shapes/links into an editable chart)
+    # ------------------------------------------------------------------
+    # We build ProcessOn's native "create" messages. A chart's pageId is its
+    # definitionId (returned by create_chart). Shape templates are captured from
+    # the real web app: rectangle (basic), decision (flow diamond), terminator
+    # (flow start/end pill). Links use name="linker" and reference shape ids.
+
+    @staticmethod
+    def _new_id() -> str:
+        return uuid.uuid4().hex[:16]
+
+    def _shape(self, name: str, category: str, title: str,
+               x: float, y: float, w: float, h: float,
+               path: list, zindex: int = 1) -> Dict[str, Any]:
+        return {
+            "id": self._new_id(), "name": name, "title": title, "category": category,
+            "group": "", "groupName": None, "locked": False, "link": "",
+            "children": [], "parent": "",
+            "resizeDir": ["tl", "tr", "br", "bl", "l", "t", "r", "b"],
+            "attribute": {"container": False, "visible": True, "rotatable": True,
+                          "linkable": True, "collapsable": False, "collapsed": False,
+                          "fixedLink": False, "markerOffset": 5},
+            "dataAttributes": [],
+            "props": {"x": x, "y": y, "w": w, "h": h, "zindex": zindex, "angle": 0},
+            "shapeStyle": {"alpha": 1}, "lineStyle": {"lineWidth": 1.5},
+            "fillStyle": {}, "theme": {}, "path": path, "fontStyle": {},
+            "textBlock": [{"position": {"x": 10, "y": 0, "w": "w-20", "h": "h"},
+                           "text": title}],
+            "anchors": [{"x": "w/2", "y": "0"}, {"x": "w/2", "y": "h"},
+                        {"x": "0", "y": "h/2"}, {"x": "w", "y": "h/2"}],
+        }
+
+    def make_node(self, shape: str, title: str, x: float, y: float,
+                  zindex: int = 1) -> Dict[str, Any]:
+        """Build one flowchart node. shape in {rectangle, decision, terminator}."""
+        if shape == "decision":
+            return self._shape("decision", "flow", title, x, y, 90, 70,
+                [{"actions": [
+                    {"action": "move", "x": "0", "y": "h/2"},
+                    {"action": "line", "x": "w/2", "y": "0"},
+                    {"action": "line", "x": "w", "y": "h/2"},
+                    {"action": "line", "x": "w/2", "y": "h"},
+                    {"action": "line", "x": "0", "y": "h/2"},
+                    {"action": "close", "y": "0"}]}], zindex)
+        if shape == "terminator":
+            return self._shape("terminator", "flow", title, x, y, 120, 52,
+                [{"actions": [
+                    {"action": "move", "x": "Math.min(w,h)/3", "y": "0"},
+                    {"action": "line", "x": "w-Math.min(w,h)/3", "y": "0"},
+                    {"action": "curve", "x": "w-Math.min(w,h)/3", "y": "h",
+                     "x1": "w+Math.min(w,h)/3/3", "x2": "w+Math.min(w,h)/3/3",
+                     "y1": "0", "y2": "h"},
+                    {"action": "line", "x": "Math.min(w,h)/3", "y": "h"},
+                    {"action": "curve", "x": "Math.min(w,h)/3", "y": "0",
+                     "x1": "-Math.min(w,h)/3/3", "x2": "-Math.min(w,h)/3/3",
+                     "y1": "h", "y2": "0"},
+                    {"action": "close"}]}], zindex)
+        # default rectangle
+        return self._shape("rectangle", "basic", title, x, y, 120, 60,
+            [{"actions": [
+                {"action": "move", "x": "0", "y": "0"},
+                {"action": "line", "x": "w", "y": "0"},
+                {"action": "line", "x": "w", "y": "h"},
+                {"action": "line", "x": "0", "y": "h"},
+                {"action": "close", "y": "0"}]}], zindex)
+
+    def make_link(self, src: Dict[str, Any], dst: Dict[str, Any],
+                  label: str = "", zindex: int = 4) -> Dict[str, Any]:
+        """Build a broken arrow from src node's bottom-center to dst's top-center."""
+        sx = src["props"]["x"] + src["props"]["w"] / 2
+        sy = src["props"]["y"] + src["props"]["h"]
+        dx = dst["props"]["x"] + dst["props"]["w"] / 2
+        dy = dst["props"]["y"]
+        return {
+            "id": self._new_id(), "name": "linker", "text": label, "group": "",
+            "linkerType": "broken", "points": [{"x": sx, "y": sy}, {"x": dx, "y": dy}],
+            "locked": False, "dataAttributes": [], "props": {"zindex": zindex},
+            "lineStyle": {"lineWidth": 1.5},
+            "from": {"x": sx, "y": sy, "id": src["id"], "angle": 0},
+            "to": {"id": dst["id"], "x": dx, "y": dy, "angle": 3.1415926535897936},
+            "textBlock": [],
+        }
+
+    def draw_flowchart(self, chart_id: str, page_id: str,
+                       nodes: list, edges: list) -> Dict[str, Any]:
+        """Draw a simple flowchart into an existing chart.
+
+        nodes: [{"id": str, "label": str, "shape": "rectangle|decision|terminator",
+                 "x"?: float, "y"?: float}]
+        edges: [{"from": node_id, "to": node_id, "label"?: str}]
+        Auto-layouts vertically when x/y are omitted. Returns server data.
+        """
+        placed: Dict[str, Dict[str, Any]] = {}
+        step = 0
+        for n in nodes:
+            shp = n.get("shape", "rectangle")
+            h = 70 if shp == "decision" else 52 if shp == "terminator" else 60
+            w = 90 if shp == "decision" else 120
+            x = n.get("x", 200)
+            y = n.get("y", 80 + step * 150)
+            node = self.make_node(shp, n.get("label", n.get("id", "")),
+                                  x, y, zindex=step + 1)
+            node["_key"] = n["id"]
+            placed[n["id"]] = node
+            step += 1
+        shapes = [v for v in placed.values()]
+        links = []
+        for e in edges:
+            a = placed.get(e["from"]); b = placed.get(e["to"])
+            if a and b:
+                links.append(self.make_link(a, b, e.get("label", "")))
+        content = shapes + links
+        msg = [{"action": "command",
+                "messages": [{"action": "create", "content": content, "pageId": page_id}],
+                "name": "", "pageId": page_id}]
+        return self._web_call(
+            "POST",
+            f"/api/personal/diagraming/canvas/v2/msg?mlfffid={chart_id}&mlffcid={chart_id}",
+            data={"msgStr": json.dumps(msg, ensure_ascii=False), "canvasId": chart_id,
+                  "chartId": chart_id, "ignore": "msgStr", "msgversion": ""},
+        )
