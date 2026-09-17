@@ -671,3 +671,51 @@ class ProcessOnClient:
             data={"msgStr": json.dumps(actions, ensure_ascii=False), "canvasId": chart_id,
                   "chartId": chart_id, "ignore": "msgStr", "msgversion": ""},
         )
+
+    # ------------------------------------------------------------------
+    # Mindmap (mind_free editor) — the real mind map, NOT the outline editor
+    # ------------------------------------------------------------------
+    # Separate editor: POST /api/personal/mindmap/canvas/msg. A chart created
+    # with category=mind_free already has a root node. Nodes are made with
+    # action="create" (content.content[], index, newPart, right-content-index);
+    # the title is set directly at create time (no separate update needed).
+
+    MIND_COLORS = ["#729B8D", "#EED484", "#E19873", "#DFE8D7"]
+
+    def create_mindmap_chart(self, title: str, folder_id: str = "root") -> Dict[str, Any]:
+        """Create an empty mindmap (mind_free) chart in My Files."""
+        return self.create_chart(title, folder_id=folder_id, category="mind_free")
+
+    def write_mindmap_tree(self, chart_id: str, page_id: str,
+                           root_title: str, nodes: list) -> Dict[str, Any]:
+        """Write a tree into a mind_free chart.
+
+        nodes: [{"text": str, "children": [ ... ]}] — root's direct children.
+        """
+        actions = [{"action": "changeTitle", "title": root_title, "editorVersion": "V2"}]
+
+        def walk(children: list, parent_id: str, depth: int,
+                 sibling_counter: dict) -> None:
+            for i, ch in enumerate(children):
+                nid = str(uuid.uuid4())
+                item = {"children": [], "id": nid, "title": ch.get("text", ""),
+                        "parent": parent_id}
+                if depth == 0:
+                    item["lineStyle"] = {"randomLineColor": self.MIND_COLORS[
+                        sibling_counter.get(parent_id, 0) % len(self.MIND_COLORS)]}
+                actions.append({"action": "create", "content": {
+                    "content": [item], "index": {nid: i}, "updates": {}, "original": {},
+                    "newPart": {nid: "right"},
+                    "add-data": {"updateTopicList": []},
+                    "right-content-index": i + 1},
+                    "pageId": page_id})
+                sibling_counter[parent_id] = sibling_counter.get(parent_id, 0) + 1
+                walk(ch.get("children", []), nid, depth + 1, sibling_counter)
+
+        walk(nodes, "root", 0, {})
+        return self._web_call(
+            "POST",
+            f"/api/personal/mindmap/canvas/msg?mlfffid={chart_id}&mlffcid={chart_id}",
+            data={"msgStr": json.dumps(actions, ensure_ascii=False), "canvasId": chart_id,
+                  "chartId": chart_id, "ignore": "msgStr", "msgversion": "v6"},
+        )
