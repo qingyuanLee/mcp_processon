@@ -15,6 +15,7 @@ https://smart.processon.com/user) is sent as `Authorization: Bearer <token>`.
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
 import os
@@ -362,6 +363,15 @@ class ProcessOnClient:
         if not token:
             raise ProcessOnAuthError("Login succeeded but no token returned.")
         sess.headers.update({"token": token})
+        # Decode JWT to keep userId/fullName (needed by outline mindmap writes).
+        try:
+            payload = token.split(".")[1]
+            payload += "=" * (-len(payload) % 4)
+            claims = json.loads(base64.urlsafe_b64decode(payload))
+            self._web_user_id = claims.get("userId", "")
+            self._web_full_name = claims.get("fullName", "")
+        except Exception:
+            self._web_user_id, self._web_full_name = "", ""
         return token
 
     def _web_call(self, method: str, path: str, *,
@@ -601,5 +611,63 @@ class ProcessOnClient:
             "POST",
             f"/api/personal/diagraming/canvas/v2/msg?mlfffid={chart_id}&mlffcid={chart_id}",
             data={"msgStr": json.dumps(msg, ensure_ascii=False), "canvasId": chart_id,
+                  "chartId": chart_id, "ignore": "msgStr", "msgversion": ""},
+        )
+
+    # ------------------------------------------------------------------
+    # Outline / mindmap (tree editor, NOT the shape canvas)
+    # ------------------------------------------------------------------
+    # Separate editor: POST /api/personal/outline/canvas/msg. A chart created
+    # with category=outline has a fixed root node id="root". Nodes are added
+    # with action="add" (parent = parent node id), titled with action="update"
+    # (key="title"). Parent is set directly at add time — no indent needed.
+
+    def create_outline_chart(self, title: str, folder_id: str = "root") -> Dict[str, Any]:
+        """Create an empty mindmap (outline) chart in My Files."""
+        return self.create_chart(title, folder_id=folder_id, category="outline")
+
+    def write_mindmap(self, chart_id: str, page_id: str,
+                      root_title: str, nodes: list,
+                      theme: str = "bg_caihong",
+                      structure: str = "mind_right") -> Dict[str, Any]:
+        """Write a tree into an outline chart.
+
+        nodes: [{"text": str, "children": [ ... ]}] — the root's direct children.
+        Recursively adds each node (parent = its parent node id) and titles it.
+        """
+        uid = getattr(self, "_web_user_id", "") or ""
+        full = getattr(self, "_web_full_name", "") or ""
+        root_node = {"freeChildren": [], "root": True, "theme": theme, "id": "root",
+                     "title": root_title, "version": 0, "structure": structure,
+                     "leftChildren": [], "todoList": {}}
+        actions = [{"action": "update",
+                    "content": {"key": "title", "nodes": [dict(root_node)],
+                                "oldNodes": [dict(root_node, title="")],
+                                "userId": uid, "fullName": full},
+                    "pageId": page_id}]
+
+        def walk(children: list, parent_id: str) -> None:
+            for i, ch in enumerate(children):
+                nid = self._new_id()
+                actions.append({"action": "add", "add-data": {},
+                                "content": [{"id": nid, "title": "",
+                                             "children": [], "parent": parent_id}],
+                                "indexs": {nid: i}, "parts": {}, "updates": {},
+                                "original": {}, "pageId": page_id})
+                actions.append({"action": "update",
+                                "content": {"key": "title",
+                                            "nodes": [{"id": nid, "title": ch.get("text", ""),
+                                                       "parent": parent_id}],
+                                            "oldNodes": [{"id": nid, "title": "",
+                                                          "parent": parent_id}],
+                                            "userId": uid, "fullName": full},
+                                "pageId": page_id})
+                walk(ch.get("children", []), nid)
+
+        walk(nodes, "root")
+        return self._web_call(
+            "POST",
+            f"/api/personal/outline/canvas/msg?mlfffid={chart_id}&mlffcid={chart_id}",
+            data={"msgStr": json.dumps(actions, ensure_ascii=False), "canvasId": chart_id,
                   "chartId": chart_id, "ignore": "msgStr", "msgversion": ""},
         )

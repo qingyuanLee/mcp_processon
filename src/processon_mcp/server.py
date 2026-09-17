@@ -403,6 +403,45 @@ def processon_draw_flowchart(
 
 
 @mcp.tool()
+def processon_draw_mindmap(
+    title: str,
+    nodes: list,
+    folder_id: str = "root",
+) -> str:
+    """Create a MINDMAP (思维笔记) in "我的文件" and fill it from a tree.
+
+    Unlike processon_draw_flowchart (shapes + arrows), this builds a native
+    ProcessOn outline/mindmap: a root with a hierarchy of children. Use it for
+    notes, outlines, mind maps, and structured summaries.
+
+    Args:
+        title:    Mindmap / file name.
+        folder_id: Target folder id (default root).
+        nodes:    The root's direct children, as a recursive tree:
+                  [{"text": "一级主题", "children": [
+                      {"text": "二级要点", "children": []}, ...]}, ...]
+                  Nest "children" as deep as you need.
+
+    Example:
+        title="项目架构"
+        nodes=[{"text":"认证体系","children":[{"text":"sk-po token"},{"text":"账号密码"}]},
+               {"text":"画图能力","children":[{"text":"流程图"},{"text":"思维导图"}]}]
+    """
+    client = _get_client()
+    try:
+        chart = client.create_outline_chart(title, folder_id=folder_id)
+        chart_id = chart["chartId"]; page_id = chart["definitionId"]
+        client.write_mindmap(chart_id, page_id, title, nodes)
+    except ProcessOnAuthError as e:
+        return f"认证失败：{e.msg}。请配置 PROCESSON_ACCOUNT / PROCESSON_PASSWORD。"
+    except ProcessOnError as e:
+        return f"创建思维导图失败：{e.msg}"
+    return (f"已创建思维导图：{title}\n"
+            f"chartId={chart_id}\n"
+            f"打开查看：{client.WEB_BASE}/diagraming/{chart_id}")
+
+
+@mcp.tool()
 def processon_cache_info() -> str:
     """Show cache backend info and whether a token is stored."""
     cache = _get_cache()
