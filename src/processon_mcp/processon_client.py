@@ -690,14 +690,10 @@ class ProcessOnClient:
                            root_title: str, nodes: list) -> Dict[str, Any]:
         """Write a tree into a mind_free chart.
 
-        nodes: [{"text": str, "children": [...],
-                 "summary": "optional summary over this node's children",
-                 "boundary": "optional boundary label around this node",
-                 "links": [{"to": "another node's text", "label": "..."}]}]
+        nodes: [{"text": str, "children": [...]}] — root's direct children.
         """
         actions = [{"action": "changeTitle", "title": root_title, "editorVersion": "V2"}]
         text_to_id: Dict[str, str] = {}
-        deferred_links: list = []
 
         def walk(children: list, parent_id: str, depth: int,
                  sibling_counter: dict) -> None:
@@ -716,43 +712,9 @@ class ProcessOnClient:
                     "pageId": page_id})
                 sibling_counter[parent_id] = sibling_counter.get(parent_id, 0) + 1
                 text_to_id[ch.get("text", "")] = nid
-
-                grandchildren = ch.get("children", [])
-                walk(grandchildren, nid, depth + 1, sibling_counter)
-
-                # summary over this node's children
-                if ch.get("summary"):
-                    sid = str(uuid.uuid4())
-                    actions.append({"action": "addSummary", "content": {
-                        "content": [{"parent": nid, "range": f"0,{len(grandchildren)}",
-                                     "children": [], "id": sid,
-                                     "title": ch["summary"], "summary": True}]},
-                        "pageId": page_id})
-                # boundary around this node (covers just this sibling)
-                if ch.get("boundary"):
-                    bid = str(uuid.uuid4())
-                    actions.append({"action": "addBoundary", "content": {
-                        "content": [{"parent": parent_id, "range": f"{i},1",
-                                     "children": [], "id": bid,
-                                     "boundary": True}]},
-                        "pageId": page_id})
-                # cross-node links (resolved after the tree exists)
-                for lk in ch.get("links", []):
-                    deferred_links.append((nid, lk))
+                walk(ch.get("children", []), nid, depth + 1, sibling_counter)
 
         walk(nodes, "root", 0, {})
-
-        # resolve cross-node connections by target text
-        for from_id, lk in deferred_links:
-            to_id = text_to_id.get(lk.get("to", ""))
-            if not to_id:
-                continue
-            cid = str(uuid.uuid4())
-            actions.append({"action": "addConnection", "content": {"content": [{
-                "from": from_id, "to": to_id, "label": lk.get("label", ""),
-                "id": cid, "points": [], "styles": {}, "pts": []}]},
-                "pageId": page_id})
-
         result = self._web_call(
             "POST",
             f"/api/personal/mindmap/canvas/msg?mlfffid={chart_id}&mlffcid={chart_id}",

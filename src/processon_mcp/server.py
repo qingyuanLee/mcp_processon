@@ -456,19 +456,14 @@ def processon_make_mindmap(
     Args:
         title:    Mindmap / file name.
         folder_id: Target folder id (default root).
-        nodes:    Root's direct children as a recursive tree. Each node is
-                  {"text": "...", "children": [...],
-                   "summary": "optional summary over this node's children",
-                   "boundary": "optional frame label around this node",
-                   "links": [{"to": "another node's text", "label": "..."}]}.
-                  Nest "children" as deep as you need.
+        nodes:    Root's direct children as a recursive tree:
+                  [{"text": "中心主题分支", "children": [
+                      {"text": "子要点", "children": []}, ...]}, ...]
 
     Example:
         title="项目架构"
-        nodes=[{"text":"认证体系","summary":"两套认证","boundary":"必看",
-                "children":[{"text":"sk-po token"},{"text":"账号密码"}]},
-               {"text":"画图能力",
-                "children":[{"text":"流程图"},{"text":"思维导图","links":[{"to":"sk-po token","label":"共用"}]}]}]
+        nodes=[{"text":"认证体系","children":[{"text":"sk-po token"},{"text":"账号密码"}]},
+               {"text":"画图能力","children":[{"text":"流程图"},{"text":"思维导图"}]}]
     """
     client = _get_client()
     try:
