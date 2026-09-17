@@ -460,13 +460,18 @@ class ProcessOnClient:
 
     def ensure_chart(self, title: str, folder_id: str = "root",
                     category: str = "flowbase") -> Dict[str, Any]:
-        """Upsert a chart: reuse an existing same-titled chart instead of creating
-        duplicates. Note: outline/mindmap editors append nodes on write; callers
-        that need a clean rewrite should delete the old chart manually first."""
+        """Upsert a chart: if a same-titled chart exists in folder_id, delete it
+        to trash first, then create a fresh one (true overwrite). Returns the new chart."""
         existing = self.find_chart_by_name(title, folder_id)
         if existing:
-            return existing
+            self.delete_chart(existing.get("chartId") or existing.get("id"))
         return self.create_chart(title, folder_id=folder_id, category=category)
+
+    def delete_chart(self, chart_id: str, resource: str = "diagrams") -> Dict[str, Any]:
+        """Move a chart to trash (recoverable, not permanent)."""
+        return self._web_call("POST", "/api/personal/folder/to_trash",
+                              data={"fileType": "chart", "fileId": chart_id,
+                                    "resource": resource})
 
     # ------------------------------------------------------------------
     # Canvas drawing (write shapes/links into an editable chart)
