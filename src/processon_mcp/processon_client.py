@@ -450,6 +450,24 @@ class ProcessOnClient:
                   "ignore": "msgStr", "msgversion": ""},
         )
 
+    def find_chart_by_name(self, title: str, folder_id: str = "root") -> Optional[Dict[str, Any]]:
+        """Return an existing same-titled chart in folder_id, or None."""
+        listing = self.list_files(folder_id)
+        for ch in listing.get("charts") or []:
+            if ch.get("title") == title:
+                return ch
+        return None
+
+    def ensure_chart(self, title: str, folder_id: str = "root",
+                    category: str = "flowbase") -> Dict[str, Any]:
+        """Upsert a chart: reuse an existing same-titled chart instead of creating
+        duplicates. Note: outline/mindmap editors append nodes on write; callers
+        that need a clean rewrite should delete the old chart manually first."""
+        existing = self.find_chart_by_name(title, folder_id)
+        if existing:
+            return existing
+        return self.create_chart(title, folder_id=folder_id, category=category)
+
     # ------------------------------------------------------------------
     # Canvas drawing (write shapes/links into an editable chart)
     # ------------------------------------------------------------------
