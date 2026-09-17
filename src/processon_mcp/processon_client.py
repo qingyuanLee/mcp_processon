@@ -18,6 +18,7 @@ from __future__ import annotations
 import json
 import os
 import time
+import uuid
 from typing import Any, Dict, Optional
 
 import requests
@@ -246,29 +247,30 @@ class ProcessOnClient:
         """Convert Markdown into an editable ProcessOn mindmap (direct REST)."""
         method, path = ENDPOINTS["md_to_mindmap"]
         structure = structure if structure in ALLOWED_STRUCTURES else "mind_free"
+        # The /transform/md endpoint works anonymously but REQUIRES a stable
+        # partnerFlag (official clients send skill_mind_doc_<uuid>). Persist it
+        # in the cache so the same install keeps one flag.
+        partner_flag = self._get_partner_flag()
         payload: Dict[str, Any] = {
             "title": title,
             "markdown": markdown,
             "structure": structure,
-            "source": "mcp_processon",
+            "source": "skill_mind_documentsummary",
+            "partnerFlag": partner_flag,
         }
         if theme:
             payload["theme"] = theme
 
         url = API_BASE + path
+        # This endpoint does not require a Bearer token; do not send one.
+        headers = dict(DEFAULT_HEADERS)
         resp = self._session.request(
             method,
             url,
             data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
-            headers=self._headers(),
+            headers=headers,
             timeout=REQUEST_TIMEOUT,
         )
-        if resp.status_code in (401, 403):
-            raise ProcessOnAuthError(
-                f"ProcessOn rejected the credential (HTTP {resp.status_code}).",
-                status_code=resp.status_code,
-                body=resp.text,
-            )
         try:
             data = resp.json()
         except Exception:
@@ -276,11 +278,23 @@ class ProcessOnClient:
                 f"Unparseable response (HTTP {resp.status_code}): {resp.text[:300]!r}",
                 status_code=resp.status_code,
             )
-        if isinstance(data, dict) and data.get("success") is False:
+        # Success shape: {"code":"200","ok":true,"data":{imgUrl,visitUrl}}
+        if not isinstance(data, dict) or data.get("ok") is False or str(data.get("code")) not in ("200", "0"):
             raise ProcessOnError(
-                f"ProcessOn error: {data.get('error', data)}", body=data
+                f"ProcessOn error: {data.get('message') or data}", body=data
             )
         return data
+
+    def _get_partner_flag(self) -> str:
+        """Return a stable partnerFlag, creating and persisting one on first use."""
+        if self._cache:
+            existing = self._cache.get("partner:flag")
+            if existing and isinstance(existing, dict) and existing.get("flag"):
+                return existing["flag"]
+        flag = "skill_mind_doc_" + uuid.uuid4().hex
+        if self._cache:
+            self._cache.set("partner:flag", {"flag": flag})
+        return flag
 
     # ------------------------------------------------------------------
     # Auth status
