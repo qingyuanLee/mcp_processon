@@ -690,7 +690,9 @@ class ProcessOnClient:
                            root_title: str, nodes: list) -> Dict[str, Any]:
         """Write a tree into a mind_free chart.
 
-        nodes: [{"text": str, "children": [...]}] — root's direct children.
+        nodes: [{"text": str, "children": [...],
+                 "summary": "optional summary over this node's children",
+                 "boundary": "optional boundary label around this node"}]
         """
         actions = [{"action": "changeTitle", "title": root_title, "editorVersion": "V2"}]
         text_to_id: Dict[str, str] = {}
@@ -712,7 +714,26 @@ class ProcessOnClient:
                     "pageId": page_id})
                 sibling_counter[parent_id] = sibling_counter.get(parent_id, 0) + 1
                 text_to_id[ch.get("text", "")] = nid
-                walk(ch.get("children", []), nid, depth + 1, sibling_counter)
+
+                grandchildren = ch.get("children", [])
+                walk(grandchildren, nid, depth + 1, sibling_counter)
+
+                # summary over this node's children
+                if ch.get("summary"):
+                    sid = str(uuid.uuid4())
+                    actions.append({"action": "addSummary", "content": {
+                        "content": [{"parent": nid, "range": f"0,{len(grandchildren)}",
+                                     "children": [], "id": sid,
+                                     "title": ch["summary"], "summary": True}]},
+                        "pageId": page_id})
+                # boundary around this node (covers just this sibling)
+                if ch.get("boundary"):
+                    bid = str(uuid.uuid4())
+                    actions.append({"action": "addBoundary", "content": {
+                        "content": [{"parent": parent_id, "range": f"{i},1",
+                                     "children": [], "id": bid,
+                                     "boundary": True}]},
+                        "pageId": page_id})
 
         walk(nodes, "root", 0, {})
         result = self._web_call(
