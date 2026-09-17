@@ -15,6 +15,7 @@ https://smart.processon.com/user) is sent as `Authorization: Bearer <token>`.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import time
@@ -91,7 +92,9 @@ class ProcessOnClient:
                         continue
                     key, _, value = line.partition("=")
                     key, value = key.strip(), value.strip().strip("\"'")
-                    if key in ("PROCESSON_API_KEY", "PROCESSON_TOKEN", "PO_API_BASE_URL") and not os.getenv(key):
+                    if key in ("PROCESSON_API_KEY", "PROCESSON_TOKEN", "PO_API_BASE_URL",
+                               "PROCESSON_ACCOUNT", "PROCESSON_PASSWORD",
+                               "PO_ACCOUNT", "PO_PASSWORD") and not os.getenv(key):
                         os.environ[key] = value
             except Exception:
                 pass
@@ -307,3 +310,108 @@ class ProcessOnClient:
             masked = (token[:8] + "..." + token[-4:]) if len(token) > 12 else "configured"
             return {"authenticated": True, "token_masked": masked}
         return {"authenticated": False, "token_masked": None}
+
+    # ------------------------------------------------------------------
+    # Main-site file management (www.processon.com "我的文件")
+    # ------------------------------------------------------------------
+    # Separate auth from the AI MCP: account + password (password sent
+    # MD5-hashed) -> JWT, sent as the `token` request header. Env:
+    # PROCESSON_ACCOUNT, PROCESSON_PASSWORD. Creates folders/charts inside
+    # the user's own "我的文件".
+
+    WEB_BASE = "https://www.processon.com"
+
+    def _web_session(self) -> requests.Session:
+        if not hasattr(self, "_sess"):
+            self._sess = requests.Session()
+            self._sess.headers.update({
+                "User-Agent": DEFAULT_HEADERS["User-Agent"],
+                "Referer": self.WEB_BASE + "/diagrams",
+                "Origin": self.WEB_BASE,
+            })
+        return self._sess
+
+    def web_login(self) -> str:
+        account = os.getenv("PROCESSON_ACCOUNT") or os.getenv("PO_ACCOUNT")
+        password = os.getenv("PROCESSON_PASSWORD") or os.getenv("PO_PASSWORD")
+        if not account or not password:
+            raise ProcessOnAuthError(
+                "File management needs PROCESSON_ACCOUNT and PROCESSON_PASSWORD "
+                "(your Processon web login) in .env or the environment."
+            )
+        sess = self._web_session()
+        md5_pwd = hashlib.md5(password.encode("utf-8")).hexdigest()
+        payload = {
+            "account": account, "password": md5_pwd,
+            "userSource": "register", "businessType": "login",
+            "registerType": "phone", "terminalType": "web", "channelType": "po",
+        }
+        sess.get(self.WEB_BASE + "/", timeout=20)
+        resp = sess.post(self.WEB_BASE + "/api/personal/login/v2/account",
+                         data=json.dumps(payload),
+                         headers={"Content-Type": "application/json"}, timeout=20)
+        try:
+            data = resp.json()
+        except Exception:
+            raise ProcessOnError(f"Login unparseable (HTTP {resp.status_code}): {resp.text[:200]!r}",
+                                 status_code=resp.status_code)
+        if str(data.get("code")) != "200":
+            raise ProcessOnAuthError(f"Main-site login failed: {data.get('msg') or data}",
+                                     status_code=resp.status_code)
+        token = (data.get("data") or {}).get("token")
+        if not token:
+            raise ProcessOnAuthError("Login succeeded but no token returned.")
+        sess.headers.update({"token": token})
+        return token
+
+    def _web_call(self, method: str, path: str, *,
+                  data: Optional[Dict[str, Any]] = None,
+                  params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        sess = self._web_session()
+        if "token" not in sess.headers:
+            self.web_login()
+        url = self.WEB_BASE + path
+        form = {"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"}
+        resp = sess.request(method, url, data=data, params=params, headers=form, timeout=30)
+        try:
+            out = resp.json()
+        except Exception:
+            raise ProcessOnError(f"API {path} unparseable (HTTP {resp.status_code}): {resp.text[:200]!r}",
+                                 status_code=resp.status_code)
+        if str(out.get("code")) in ("408", "403") and "鉴权" in str(out.get("msg", "")):
+            self.web_login()
+            resp = sess.request(method, url, data=data, params=params, headers=form, timeout=30)
+            out = resp.json()
+        if str(out.get("code")) != "200":
+            raise ProcessOnError(f"API {path} error: {out.get('msg') or out}", body=out)
+        return out.get("data") or {}
+
+    def create_folder(self, title: str, parent_id: str = "root") -> Dict[str, Any]:
+        data = self._web_call("POST", "/api/personal/folder/new",
+                              data={"title": title, "folderId": parent_id})
+        return data.get("folder") or data
+
+    def list_files(self, folder_id: str = "root") -> Dict[str, Any]:
+        return self._web_call("GET", "/api/personal/folder/load_files",
+                              params={"folderId": folder_id, "sidx": "lastModify",
+                                      "sort": "desc", "pageSize": 50, "page": 1})
+
+    def create_chart(self, title: str, folder_id: str = "root",
+                     category: str = "flowbase") -> Dict[str, Any]:
+        data = self._web_call("POST", "/api/personal/diagraming/create",
+                              data={"folderId": folder_id, "category": category})
+        chart = data.get("chart") or data
+        chart_id = chart.get("chartId")
+        if title and chart_id:
+            self.rename_chart(chart_id, title)
+            chart["title"] = title
+        return chart
+
+    def rename_chart(self, chart_id: str, title: str) -> Dict[str, Any]:
+        msg = json.dumps([{"action": "changeTitle", "title": title}], ensure_ascii=False)
+        return self._web_call(
+            "POST",
+            f"/api/personal/diagraming/canvas/v2/msg?mlfffid={chart_id}&mlffcid={chart_id}",
+            data={"msgStr": msg, "canvasId": chart_id, "chartId": chart_id,
+                  "ignore": "msgStr", "msgversion": ""},
+        )

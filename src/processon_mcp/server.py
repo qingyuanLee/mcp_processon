@@ -273,6 +273,88 @@ def processon_md_to_mindmap(
 
 
 @mcp.tool()
+def processon_create_folder(
+    title: str,
+    parent_folder_id: str = "root",
+) -> str:
+    """Create a folder inside the user's ProcessOn "我的文件" (My Files).
+
+    Use this to organize generated diagrams into project directories, e.g.
+    create "mcp_processon" once, then put all related charts inside it.
+
+    Args:
+        title: Folder name, e.g. "mcp_processon".
+        parent_folder_id: Parent folder id; "root" (default) puts it at top level.
+    """
+    client = _get_client()
+    try:
+        folder = client.create_folder(title, parent_id=parent_folder_id)
+    except ProcessOnAuthError as e:
+        return f"认证失败：{e.msg}。请在 .env 配置 PROCESSON_ACCOUNT / PROCESSON_PASSWORD。"
+    except ProcessOnError as e:
+        return f"创建文件夹失败：{e.msg}"
+    return (f"已创建文件夹：{folder.get('title')}\n"
+            f"folderId={folder.get('folderId')}\n"
+            f"parentId={folder.get('parentId')}")
+
+
+@mcp.tool()
+def processon_list_files(folder_id: str = "root") -> str:
+    """List charts and sub-folders inside a ProcessOn "我的文件" folder.
+
+    Args:
+        folder_id: Folder id to list. Use "root" for top level (default).
+    """
+    client = _get_client()
+    try:
+        data = client.list_files(folder_id)
+    except ProcessOnAuthError as e:
+        return f"认证失败：{e.msg}。请配置 PROCESSON_ACCOUNT / PROCESSON_PASSWORD。"
+    except ProcessOnError as e:
+        return f"列文件失败：{e.msg}"
+    lines = [f"文件夹 {folder_id} 内容："]
+    for f in data.get("folders", []):
+        lines.append(f"  [文件夹] {f.get('title')}  (folderId={f.get('folderId')})")
+    for c in data.get("charts", []):
+        lines.append(f"  [图表]   {c.get('title')}  (chartId={c.get('chartId')})")
+    if not data.get("folders") and not data.get("charts"):
+        lines.append("  (空)")
+    return "\n".join(lines)
+
+
+@mcp.tool()
+def processon_create_chart(
+    title: str,
+    folder_id: str = "root",
+    category: str = "flowbase",
+) -> str:
+    """Create a blank editable chart directly in "我的文件", already titled.
+
+    This writes into the user's own file tree (not a temporary third-party
+    share). Use it to archive/keep a chart in a folder. The chart is blank —
+    for AI-authored content, use processon_render_mermaid to generate it,
+    then open the editable link to move it in.
+
+    Args:
+        title: Chart title, e.g. "po_mcp-v1".
+        folder_id: Folder to put it in (default "root").
+        category: Diagram type. "flowbase" (flowchart, default), "mind",
+                  "umltable", "network" etc. Leave as default for a blank flowchart.
+    """
+    client = _get_client()
+    try:
+        chart = client.create_chart(title, folder_id=folder_id, category=category)
+    except ProcessOnAuthError as e:
+        return f"认证失败：{e.msg}。请配置 PROCESSON_ACCOUNT / PROCESSON_PASSWORD。"
+    except ProcessOnError as e:
+        return f"创建图表失败：{e.msg}"
+    chart_id = chart.get("chartId")
+    return (f"已在我的文件创建图表：{chart.get('title')}\n"
+            f"chartId={chart_id}\n"
+            f"打开：{client.WEB_BASE}/diagraming/{chart_id}")
+
+
+@mcp.tool()
 def processon_cache_info() -> str:
     """Show cache backend info and whether a token is stored."""
     cache = _get_cache()
