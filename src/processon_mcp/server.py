@@ -361,6 +361,7 @@ def processon_draw_flowchart(
     page_id: str,
     nodes: list,
     edges: list,
+    theme: str = "",
 ) -> str:
     """Draw a flowchart DIRECTLY into an existing ProcessOn chart in "我的文件".
 
@@ -377,21 +378,27 @@ def processon_draw_flowchart(
                "x"?: float, "y"?: float}. Omit x/y for automatic vertical layout.
         edges: List of edges, each {"from": <node id>, "to": <node id>,
                "label"?: str}. Draws a downward arrow between them.
+        theme: Visual style, applied client-side (does NOT consume ProcessOn's
+               paid AI style tokens). One of: "techblue" (the ProcessOn AI
+               default), "cleanemerald", "warmorange", "slatepurple".
+               Empty = plain default colours.
 
     Example:
         nodes=[{"id":"a","label":"开始","shape":"terminator"},
                {"id":"b","label":"校验登录","shape":"decision"},
                {"id":"c","label":"查询数据库","shape":"rectangle"}]
         edges=[{"from":"a","to":"b"},{"from":"b","to":"c","label":"通过"}]
+        theme="techblue"
     """
     client = _get_client()
     try:
-        data = client.draw_flowchart(chart_id, page_id, nodes, edges)
+        data = client.draw_flowchart(chart_id, page_id, nodes, edges, theme=theme)
     except ProcessOnAuthError as e:
         return f"认证失败：{e.msg}。请配置 PROCESSON_ACCOUNT / PROCESSON_PASSWORD。"
     except ProcessOnError as e:
         return f"画图失败：{e.msg}"
-    return (f"已向图表写入 {len(nodes)} 个节点、{len(edges)} 条连线。\n"
+    themed = f"，应用主题 {theme}" if theme else ""
+    return (f"已向图表写入 {len(nodes)} 个节点、{len(edges)} 条连线{themed}。\n"
             f"打开查看：{client.WEB_BASE}/diagraming/{chart_id}")
 
 

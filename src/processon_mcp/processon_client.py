@@ -424,13 +424,40 @@ class ProcessOnClient:
     # the real web app: rectangle (basic), decision (flow diamond), terminator
     # (flow start/end pill). Links use name="linker" and reference shape ids.
 
+    # Named color themes (RGB triplets as "r,g,b") — replace ProcessOn's paid
+    # "AI style optimize" with our own coloring + a setTheme message.
+    THEMES = {
+        "techblue": {  # the ProcessOn AI default captured from the web app
+            "fill": "0,91,153", "font": "183,233,255", "line": "0,67,112",
+            "page": "245,245,245", "name": "aiTheme0",
+        },
+        "cleanemerald": {
+            "fill": "46,125,86", "font": "232,245,233", "line": "27,94,32",
+            "page": "250,250,250", "name": "emerald",
+        },
+        "warmorange": {
+            "fill": "230,81,0", "font": "255,243,224", "line": "191,54,12",
+            "page": "255,248,240", "name": "orange",
+        },
+        "slatepurple": {
+            "fill": "94,53,177", "font": "237,231,246", "line": "74,20,140",
+            "page": "245,245,250", "name": "purple",
+        },
+    }
+
     @staticmethod
     def _new_id() -> str:
         return uuid.uuid4().hex[:16]
 
     def _shape(self, name: str, category: str, title: str,
                x: float, y: float, w: float, h: float,
-               path: list, zindex: int = 1) -> Dict[str, Any]:
+               path: list, zindex: int = 1,
+               colors: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
+        fill = {"color": colors["fill"]} if colors else {}
+        line = {"lineWidth": 1.5}
+        if colors:
+            line["lineColor"] = colors["line"]
+        font = {"color": colors["font"]} if colors else {}
         return {
             "id": self._new_id(), "name": name, "title": title, "category": category,
             "group": "", "groupName": None, "locked": False, "link": "",
@@ -441,8 +468,8 @@ class ProcessOnClient:
                           "fixedLink": False, "markerOffset": 5},
             "dataAttributes": [],
             "props": {"x": x, "y": y, "w": w, "h": h, "zindex": zindex, "angle": 0},
-            "shapeStyle": {"alpha": 1}, "lineStyle": {"lineWidth": 1.5},
-            "fillStyle": {}, "theme": {}, "path": path, "fontStyle": {},
+            "shapeStyle": {"alpha": 1}, "lineStyle": line,
+            "fillStyle": fill, "theme": {}, "path": path, "fontStyle": font,
             "textBlock": [{"position": {"x": 10, "y": 0, "w": "w-20", "h": "h"},
                            "text": title}],
             "anchors": [{"x": "w/2", "y": "0"}, {"x": "w/2", "y": "h"},
@@ -450,7 +477,8 @@ class ProcessOnClient:
         }
 
     def make_node(self, shape: str, title: str, x: float, y: float,
-                  zindex: int = 1) -> Dict[str, Any]:
+                  zindex: int = 1,
+                  colors: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
         """Build one flowchart node. shape in {rectangle, decision, terminator}."""
         if shape == "decision":
             return self._shape("decision", "flow", title, x, y, 90, 70,
@@ -460,7 +488,7 @@ class ProcessOnClient:
                     {"action": "line", "x": "w", "y": "h/2"},
                     {"action": "line", "x": "w/2", "y": "h"},
                     {"action": "line", "x": "0", "y": "h/2"},
-                    {"action": "close", "y": "0"}]}], zindex)
+                    {"action": "close", "y": "0"}]}], zindex, colors)
         if shape == "terminator":
             return self._shape("terminator", "flow", title, x, y, 120, 52,
                 [{"actions": [
@@ -473,7 +501,7 @@ class ProcessOnClient:
                     {"action": "curve", "x": "Math.min(w,h)/3", "y": "0",
                      "x1": "-Math.min(w,h)/3/3", "x2": "-Math.min(w,h)/3/3",
                      "y1": "h", "y2": "0"},
-                    {"action": "close"}]}], zindex)
+                    {"action": "close"}]}], zindex, colors)
         # default rectangle
         return self._shape("rectangle", "basic", title, x, y, 120, 60,
             [{"actions": [
@@ -481,34 +509,57 @@ class ProcessOnClient:
                 {"action": "line", "x": "w", "y": "0"},
                 {"action": "line", "x": "w", "y": "h"},
                 {"action": "line", "x": "0", "y": "h"},
-                {"action": "close", "y": "0"}]}], zindex)
+                {"action": "close", "y": "0"}]}], zindex, colors)
 
     def make_link(self, src: Dict[str, Any], dst: Dict[str, Any],
-                  label: str = "", zindex: int = 4) -> Dict[str, Any]:
+                  label: str = "", zindex: int = 4,
+                  colors: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
         """Build a broken arrow from src node's bottom-center to dst's top-center."""
         sx = src["props"]["x"] + src["props"]["w"] / 2
         sy = src["props"]["y"] + src["props"]["h"]
         dx = dst["props"]["x"] + dst["props"]["w"] / 2
         dy = dst["props"]["y"]
+        line = {"lineWidth": 1.5}
+        if colors:
+            line["lineColor"] = colors["line"]
         return {
             "id": self._new_id(), "name": "linker", "text": label, "group": "",
             "linkerType": "broken", "points": [{"x": sx, "y": sy}, {"x": dx, "y": dy}],
             "locked": False, "dataAttributes": [], "props": {"zindex": zindex},
-            "lineStyle": {"lineWidth": 1.5},
+            "lineStyle": line,
             "from": {"x": sx, "y": sy, "id": src["id"], "angle": 0},
             "to": {"id": dst["id"], "x": dx, "y": dy, "angle": 3.1415926535897936},
             "textBlock": [],
         }
 
+    def _set_theme_message(self, colors: Dict[str, str], page_id: str) -> Dict[str, Any]:
+        """Build a setTheme message matching the captured ProcessOn AI theme."""
+        shape = {"fontStyle": {"color": colors["font"]},
+                 "fillStyle": {"color": colors["fill"]},
+                 "lineStyle": {"lineColor": colors["line"]}}
+        linker = {"fontStyle": {"color": colors["line"]},
+                  "lineStyle": {"lineColor": colors["line"]}}
+        page = {"backgroundColor": colors["page"]}
+        update = {"shape": shape, "linker": linker, "page": page,
+                  "name": colors.get("name", "customTheme"),
+                  "colors": [{"shape": shape, "linker": linker, "page": page}]}
+        return {"action": "setTheme",
+                "content": {"theme": {}, "update": update},
+                "pageId": page_id}
+
     def draw_flowchart(self, chart_id: str, page_id: str,
-                       nodes: list, edges: list) -> Dict[str, Any]:
+                       nodes: list, edges: list,
+                       theme: str = "") -> Dict[str, Any]:
         """Draw a simple flowchart into an existing chart.
 
         nodes: [{"id": str, "label": str, "shape": "rectangle|decision|terminator",
                  "x"?: float, "y"?: float}]
         edges: [{"from": node_id, "to": node_id, "label"?: str}]
-        Auto-layouts vertically when x/y are omitted. Returns server data.
+        theme: optional preset name — techblue / cleanemerald / warmorange /
+               slatepurple. Colours shapes + applies a page theme (replaces the
+               paid ProcessOn "AI style optimize"). Empty = plain default.
         """
+        colors = self.THEMES.get(theme) if theme else None
         placed: Dict[str, Dict[str, Any]] = {}
         step = 0
         for n in nodes:
@@ -518,8 +569,7 @@ class ProcessOnClient:
             x = n.get("x", 200)
             y = n.get("y", 80 + step * 150)
             node = self.make_node(shp, n.get("label", n.get("id", "")),
-                                  x, y, zindex=step + 1)
-            node["_key"] = n["id"]
+                                  x, y, zindex=step + 1, colors=colors)
             placed[n["id"]] = node
             step += 1
         shapes = [v for v in placed.values()]
@@ -527,10 +577,12 @@ class ProcessOnClient:
         for e in edges:
             a = placed.get(e["from"]); b = placed.get(e["to"])
             if a and b:
-                links.append(self.make_link(a, b, e.get("label", "")))
+                links.append(self.make_link(a, b, e.get("label", ""), colors=colors))
         content = shapes + links
-        msg = [{"action": "command",
-                "messages": [{"action": "create", "content": content, "pageId": page_id}],
+        messages = [{"action": "create", "content": content, "pageId": page_id}]
+        if colors:
+            messages.append(self._set_theme_message(colors, page_id))
+        msg = [{"action": "command", "messages": messages,
                 "name": "", "pageId": page_id}]
         return self._web_call(
             "POST",
