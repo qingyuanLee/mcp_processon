@@ -1,131 +1,132 @@
+<div align="center">
+
 # processon-mcp
 
-**ProcessOn MCP Server** — turn your own ProcessOn permanent account into a
-Model Context Protocol tool that generates editable online diagrams for AI hosts
-(Doubao, Claude, Cursor, ...).
+**Turn your own ProcessOn account into an LLM-driven diagramming engine.**
 
-It wraps [ProcessOn AI](https://smart.processon.com) so an AI can draw flowcharts,
-architecture diagrams, mindmaps, UML, timelines and more on demand, and hand back
-both a preview image and an **editable online link**.
+Draw flowcharts, mindmaps and outlines natively — **no paid AI credits, no bitmaps, every shape is editable.**
 
-> Architecture follows the same pattern as [mcp-mubu](https://github.com/liuboacean/mubu-integration):
-> a thin MCP Python SDK layer on top of an HTTP API client, with a pluggable
-> SQLite cache.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)]()
+[![MCP](https://img.shields.io/badge/MCP-stdio%2Fhttp-orange.svg)](https://modelcontextprotocol.io/)
+
+</div>
+
+## Why this exists
+
+Most ProcessOn integrations just call the paid "AI generate" endpoint: you burn
+credits, get a flat image, and can't tweak it. This project goes deeper — it
+drives ProcessOn's **native canvas editor** the same way a human would, so the
+LLM itself assembles editable shapes, connectors, mindmap branches and annotations,
+and ProcessOn spends **zero AI quota**.
+
+The output is always a **live, editable online diagram** — not a screenshot.
 
 ## ✨ Features
 
-- **Natural language → diagram**: describe an idea, get a professional editable chart
-- **Markdown → mindmap**: turn notes/outlines into an editable mindmap
-- **30+ diagram types**: flowcharts, swimlanes, sequence, architecture, ER, org, timeline, infographic …
-- **Editable output, not dead images**: every chart returns a ProcessOn editor link
-- **Your own account**: uses your ProcessOn permanent account via a personal API token
-- **MCP standard**: tools + resources + prompts over stdio (default) or HTTP
-- **Zero-config cache**: SQLite at `~/.processon-mcp/cache.db`
+- **Zero-quota native drawing** — LLM authors shapes/edges directly onto the
+  canvas; no AI consumption, no bitmap.
+- **Three editor protocols, reverse-engineered and working:**
+  - `flowbase` — flowcharts & architecture: rectangles, decision diamonds,
+    terminators, arrows, **4 built-in themes**, colored fills, hidden grid.
+  - `outline` — outliner / thinking notes, root-level tree writing.
+  - `mind_free` — real mindmaps with auto-colored branches.
+- **Mindmap annotations** — `summary` (概要), `boundary` (外框), and
+  cross-node `links` (跨节点连线), all verified end-to-end.
+- **Full file management** — create folders, list files, create/rename charts
+  in "My Files", via account login (JWT, auto re-auth on 401/408).
+- **Dual auth** — `sk-po-...` token for the AI surface, account+password for
+  the personal file surface.
+- **Standard MCP** — tools over stdio (default) or Streamable HTTP, pluggable
+  SQLite cache.
 
 ## 🚀 Quick Start
 
-### Install
-
 ```bash
-# With uv (recommended)
-uv venv
-uv pip install -e .
-
-# Or plain pip
-pip install -e .
+uv venv && uv pip install -e .      # or: pip install -e .
 ```
 
-### Get a token
+### Credentials
 
-1. Open https://smart.processon.com/user
-2. Create an access token (looks like `sk-po-...`) and copy it.
+Copy `.env.example` → `.env` and fill in:
 
-### Set credentials
+```ini
+# Drawing (AI surface, Bearer token from https://smart.processon.com/user)
+PROCESSON_API_KEY=sk-po-...
 
-Copy `.env.example` to `.env` in the project root and fill it in (loaded
-automatically), or export the variable:
-
-```
-PROCESSON_API_KEY=sk-po-your-token
+# Files / native canvas (your personal account)
+PROCESSON_ACCOUNT=your_phone
+PROCESSON_PASSWORD=your_password     # MD5-hashed in transit
 ```
 
 ### Run
 
 ```bash
-processon-mcp                              # stdio (default — for Doubao/Claude)
-processon-mcp --transport http --port 3100   # Streamable HTTP
-processon-mcp -v                           # debug logging
+processon-mcp                          # stdio — for Doubao / Claude / Cursor
+processon-mcp --transport http --port 3100
 ```
 
 ## 🔧 MCP Tools
 
-| Tool | Description |
-|------|-------------|
-| `processon_whoami` | Show current ProcessOn auth status |
-| `processon_design_diagram` | Turn an idea into a Mermaid diagram definition (first draft / planning) |
-| `processon_render_mermaid` | Render a Mermaid you authored into an editable ProcessOn diagram |
-| `processon_generate_chart` | One-shot: natural-language prompt -> editable diagram |
-| `processon_md_to_mindmap` | Convert Markdown into an editable mindmap |
-| `processon_cache_info` | Show cache backend info |
-| `processon_cache_clear` | Clear cached data |
+| Tool | What it does |
+|------|--------------|
+| `processon_whoami` | Show account + auth status |
+| `processon_create_folder` / `processon_list_files` | Organize "My Files" |
+| `processon_create_chart` | Create an empty editable chart (`flowbase` / `outline` / `mind_free` / `markdown`) |
+| `processon_rename_chart` | Rename a chart |
+| `processon_draw_flowchart` | **LLM draws native shapes + edges** into a chart, with a theme |
+| `processon_draw_mindmap` | Outline-style mind notes |
+| `processon_make_mindmap` | **Real mindmap** with colored branches + summary / boundary / links |
+| `processon_design_diagram` / `processon_render_mermaid` | Mermaid draft → editable render |
+| `processon_generate_chart` | One-shot natural-language chart (AI surface) |
+| `processon_md_to_mindmap` | Markdown → editable mindmap |
 
-### LLM-led diagramming workflow (0 -> 1 -> 100)
+### LLM-led flowchart, end to end
 
-ProcessOn has no low-level "add node / add edge" editing API, so the LLM owns
-the diagram through **Mermaid source** and ProcessOn only renders it:
-
-1. `processon_design_diagram` — get a Mermaid skeleton for an idea.
-2. The LLM edits the Mermaid directly (add/remove nodes, edges, labels).
-3. `processon_render_mermaid` — render the edited Mermaid into a professional
-   editable online chart; get preview image + editable link.
-4. Repeat 2–3 to iterate toward the final diagram.
-
-One Mermaid grammar covers flowcharts, architecture / network-deployment,
-mindmaps, sequence, ER, class, timeline and C4 diagrams.
-
-### MCP Resources
-
-| Resource | Description |
-|----------|-------------|
-| `processon://status` | Auth and cache status |
-
-### MCP Prompts
-
-| Prompt | Description |
-|--------|-------------|
-| `processon_setup_guide` | Step-by-step configuration guide |
-
-## 🧩 Doubao (豆包) connector
-
-See [`processon-mcp-连接器配置指南.md`](./processon-mcp-连接器配置指南.md)
-for how to register this server as a Doubao custom connector.
-
-## 🏗️ Project Structure
-
-```
-processon-mcp/
-├── pyproject.toml
-├── README.md
-└── src/
-    └── processon_mcp/
-        ├── __init__.py
-        ├── __main__.py            # CLI entrypoint
-        ├── server.py              # MCP server (tools, resources, prompts)
-        ├── processon_client.py    # ProcessOn HTTP / JSON-RPC client
-        ├── processon_config.py    # Config, constants, error types
-        └── cache/
-            ├── __init__.py        # Cache factory
-            ├── base.py            # CacheBackend ABC
-            └── sqlite_cache.py    # Built-in SQLite backend
+```python
+# create_chart → draw_flowchart(nodes, edges, theme="techblue")
+nodes=[{"id":"start","label":"开始","shape":"terminator"},
+       {"id":"auth","label":"登录","shape":"rectangle"},
+       {"id":"ok","label":"校验通过?","shape":"decision"}]
+edges=[{"from":"start","to":"auth"},{"from":"auth","to":"ok"}]
 ```
 
-## ⚠️ Notes
+Every shape is a native ProcessOn object — click it in the browser and edit text,
+color, geometry, exactly as if you had drawn it by hand.
 
-- This is an unofficial integration built on ProcessOn's hosted AI API.
-- Diagram generation is async on ProcessOn's side; the server waits for the
-  result (default timeout 180s).
-- The personal API token is equivalent to a password — keep it secret, never
-  commit `.env`.
+### Mindmap with annotations
+
+```python
+nodes=[
+  {"text":"认证体系","summary":"两套认证","boundary":"基础",
+   "children":[{"text":"sk-po token"},{"text":"账号密码"}]},
+  {"text":"画图能力","children":[
+     {"text":"流程图"},
+     {"text":"思维导图","links":[{"to":"sk-po token","label":"共用"}]}]},
+]
+# summary = 概要条, boundary = 外框, links = 跨节点连线
+```
+
+## 🧩 Known boundaries (tested)
+
+- Native writing targets **flowbase / outline / mind_free**. `markdown`-type
+  files use a collaborative document format with no public write API.
+- Mindmap links use a fixed anchor template; extreme layouts may need manual nudging.
+- Rendering is async on ProcessOn's side (seconds), timeout 180s.
+
+## 🏗️ Structure
+
+```
+src/processon_mcp/
+├── server.py             # MCP tools/resources/prompts
+├── processon_client.py   # dual-auth HTTP client + all 3 editor protocols
+└── cache/sqlite_cache.py
+```
+
+## ⚠️ Disclaimer
+
+Unofficial integration against ProcessOn's private web + AI APIs. Not affiliated
+with ProcessOn. Your token and password are secrets — never commit `.env`.
 
 ## 📄 License
 
