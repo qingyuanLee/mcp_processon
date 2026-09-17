@@ -473,6 +473,14 @@ class ProcessOnClient:
                               data={"fileType": "chart", "fileId": chart_id,
                                     "resource": resource})
 
+    def move_file(self, file_id: str, target_folder_id: str,
+                  file_type: str = "chart") -> Dict[str, Any]:
+        """Move a chart (file_type=chart) or folder (file_type=folder) under
+        target_folderId."""
+        return self._web_call("POST", "/api/personal/folder/move",
+                              data={"fileType": file_type, "fileId": file_id,
+                                    "targetFolderId": target_folder_id})
+
     # ------------------------------------------------------------------
     # Canvas drawing (write shapes/links into an editable chart)
     # ------------------------------------------------------------------
