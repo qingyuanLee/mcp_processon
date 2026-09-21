@@ -971,6 +971,47 @@ class ProcessOnClient:
                                 {"x": dx, "y": mid_y}]
         return linker
 
+    def _avoid_boxes_on_link(self, link: Dict[str, Any],
+                             boxes: List[Dict[str, Any]]) -> None:
+        """Slide a broken-elbow's horizontal segment to the first y that does NOT
+        cross any box other than the connector's own endpoints. Boxes = nodes +
+        container frames. Works on the two middle points of the elbow."""
+        if link.get("linkerType") != "broken" or len(link.get("points", [])) < 2:
+            return
+        from_id = link.get("from", {}).get("id")
+        to_id = link.get("to", {}).get("id")
+        p0, p1 = link["points"][0], link["points"][1]
+        x_lo = min(p0["x"], p1["x"])
+        x_hi = max(p0["x"], p1["x"])
+
+        def crosses(y: float) -> bool:
+            for b in boxes:
+                bid = b.get("id")
+                if bid == from_id or bid == to_id:
+                    continue
+                bp = b.get("props", b)
+                bx, by, bw, bh = bp["x"], bp["y"], bp["w"], bp["h"]
+                # horizontal line at y overlaps this box vertically AND horizontally
+                if by <= y <= by + bh and bx <= x_hi and bx + bw >= x_lo:
+                    return True
+            return False
+
+        y = p0["y"]
+        step = 20.0
+        # scan down first (elbows usually route downward between layers)
+        for _ in range(40):
+            if not crosses(y):
+                break
+            y += step
+        else:
+            y = p0["y"]
+            for _ in range(40):
+                if not crosses(y):
+                    break
+                y -= step
+        p0["y"] = y
+        p1["y"] = y
+
     def _set_theme_message(self, colors: Dict[str, str], page_id: str) -> Dict[str, Any]:
         """Build a setTheme message matching the captured ProcessOn AI theme."""
         shape = {"fontStyle": {"color": colors["font"]},
@@ -1115,6 +1156,10 @@ class ProcessOnClient:
                     a, b, e.get("label", ""), colors=colors,
                     link_type=e.get("type", "broken"),
                     line_style=e.get("style", "")))
+        # Route elbow horizontal segments around unrelated node/container boxes,
+        # so a connector never slices through a box it has nothing to do with.
+        for link in links:
+            self._avoid_boxes_on_link(link, list(placed.values()) + containers)
         # Edges crossing after layout → distinct color + dash per edge, so a
         # reader can still follow each one (user's explicit style/color wins).
         crossing = self._count_crossings(placed, edges)

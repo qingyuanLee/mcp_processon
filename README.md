@@ -39,8 +39,9 @@ The output is always a **live, editable online diagram** — not a screenshot.
     architecture layers/subsystems, with a light tinted background that
     contrasts the dark node fills), **edges anchor on the frame edge** (correct
     ProcessOn anchor angles — no lines cutting through boxes), elbow routes bend
-    in the inter-layer gap, remaining crossing lines get distinct colors and
-    dash styles automatically, **4 built-in themes**, colored fills, hidden
+    in the inter-layer gap, elbow horizontal segments are routed around unrelated
+    node/container boxes (cross-layer lines never slice through a box), remaining
+    crossing lines get distinct colors and dash styles automatically, **4 built-in themes**, colored fills, hidden
     grid.
   - `outline` — outliner / thinking notes, root-level tree writing.
   - `mind_free` — real mindmaps with auto-colored branches.
