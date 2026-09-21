@@ -356,12 +356,42 @@ def processon_create_chart(
 
 
 @mcp.tool()
+def processon_share_chart(
+    chart_id: str,
+    permanent: bool = True,
+) -> str:
+    """Generate a public share link for a chart in "我的文件".
+
+    Opens sharing on the chart — the server mints a separate 24-hex viewLinkId
+    (the link is NOT derivable from chartId) — and returns the public URL:
+    https://www.processon.com/view/link/{viewLinkId}
+
+    Args:
+        chart_id: The chart's id (from processon_create_chart / list_files).
+        permanent: True (default) = link never expires; False = keep the
+                   server's default expiry policy.
+    """
+    client = _get_client()
+    try:
+        info = client.share_chart(chart_id, permanent=permanent)
+    except ProcessOnAuthError as e:
+        return f"认证失败：{e.msg}。请配置 PROCESSON_ACCOUNT / PROCESSON_PASSWORD。"
+    except ProcessOnError as e:
+        return f"开启分享失败：{e.msg}"
+    return (f"已开启分享：\n{info['shareUrl']}\n"
+            f"chartId={info['chartId']}\n"
+            f"viewLinkId={info['viewLinkId']}\n"
+            f"永久有效={info['permanent']}")
+
+
+@mcp.tool()
 def processon_draw_flowchart(
     chart_id: str,
     page_id: str,
     nodes: list,
     edges: list,
     theme: str = "",
+    auto_layout: bool = True,
 ) -> str:
     """Draw a flowchart DIRECTLY into an existing ProcessOn chart in "我的文件".
 
@@ -370,18 +400,30 @@ def processon_draw_flowchart(
     First create the chart with processon_create_chart (it returns chartId and
     pageId=definitionId), then call this to populate it.
 
+    Boxes auto-size to their labels (long text wraps inside the shape), and —
+    unless every node gives explicit x/y — a layered layout places the nodes by
+    hierarchy and reduces edge crossings; any lines that still cross get
+    distinct colors and dash styles automatically.
+
     Args:
         chart_id: Target chart id (from processon_create_chart).
         page_id:  Target page id = the chart's definitionId (from create_chart).
         nodes: List of nodes, each {"id": str, "label": str,
                "shape": "rectangle"|"decision"|"terminator",
-               "x"?: float, "y"?: float}. Omit x/y for automatic vertical layout.
+               "x"?: float, "y"?: float}. Omit x/y for automatic layered layout.
         edges: List of edges, each {"from": <node id>, "to": <node id>,
-               "label"?: str}. Draws a downward arrow between them.
+               "label"?: str, "style"?: "solid"|"dashed"|"dot"|"dashdot",
+               "type"?: "broken"|"normal",
+               "color"?: "#RRGGBB"|"r,g,b"}.
+               Draws a downward arrow between them; style picks the line dash
+               pattern (default solid), type picks elbow (broken, default) vs
+               straight (normal) routing, color overrides the line color.
         theme: Visual style, applied client-side (does NOT consume ProcessOn's
                paid AI style tokens). One of: "techblue" (the ProcessOn AI
                default), "cleanemerald", "warmorange", "slatepurple".
                Empty = plain default colours.
+        auto_layout: False keeps the caller's x/y as-is (no layering or
+                     crossing recoloring).
 
     Example:
         nodes=[{"id":"a","label":"开始","shape":"terminator"},
@@ -392,7 +434,8 @@ def processon_draw_flowchart(
     """
     client = _get_client()
     try:
-        data = client.draw_flowchart(chart_id, page_id, nodes, edges, theme=theme)
+        data = client.draw_flowchart(chart_id, page_id, nodes, edges,
+                                     theme=theme, auto_layout=auto_layout)
     except ProcessOnAuthError as e:
         return f"认证失败：{e.msg}。请配置 PROCESSON_ACCOUNT / PROCESSON_PASSWORD。"
     except ProcessOnError as e:

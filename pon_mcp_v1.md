@@ -1,0 +1,154 @@
+# pon_mcp_v1 归档（i-have-adhd 风格）
+- 当前状态：v1.5 不拥挤保证+分组容器（2026-09-21）；v1.4 布局美感修复；v1.3 文字自适应+自动布局；v1.2 连线线型；v1.1 分享链接；v1 三标注全通并 push GitHub，本文档为唯一归档
+- 0. 怎么用这份归档
+  - 下一步：打开幕布 → 搜 pon_mcp_v1 → 点开本档根节点，按需点各章展开
+  - 查找路径：认证线→二2；三标注字段→二4；死路清单→二7；提交记录→一5；分享链接→二9；连线线型→二10；布局与文字自适应→二11；布局美感修复→二12；不拥挤+分组容器→二13
+  - 时间预算：读完全文约 3 分钟；单章约 30 秒
+- 一、项目版本迭代描述（v1）
+  - 1. 一句话结论：把 ProcessOn 永久账号封装成 MCP，LLM 直接画原生可编辑图，零 AI 额度，思维导图三标注全通
+  - 2. 项目定位
+    - ProcessOn MCP server：让 AI 在自己的永久账户里画流程图/思维笔记/真思维导图
+    - 架构：Python 3.12 + MCP SDK + 自有 HTTP client（参照 mcp_mubu），包名 processon_mcp
+  - 3. v1 迭代目标（4 项）
+    - 目标1：文件管理（建文件夹/列文件/建图/重命名）走账号密码登录
+    - 目标2：流程图 flowbase 原生节点+4 主题美化
+    - 目标3：真思维导图 mind_free 彩色分支
+    - 目标4：思维导图三标注 summary/boundary/links
+  - 4. 实现内容
+    - 双认证：sk-po token 走 AI 面；账号密码（MD5 后 POST /api/personal/login/v2/account）拿 JWT，过期自动重登
+    - 三套编辑器协议：flowbase（canvas/v2/msg）、outline（outline/canvas/msg）、mind_free（mindmap/canvas/msg，msgversion=v6）
+    - 关键事实：pageId = create_chart 返回的 definitionId，不是 chartId
+    - 三标注固化在 write_mindmap_tree
+  - 5. 提交记录
+    - b52fb8a：mind_free 初版
+    - 959deb5：三标注探针全 200
+    - 8cc25f2：connection 缺坐标白屏 → 回退
+    - 292d425：保留 summary/boundary
+    - 4b84f50：照抓包补 connection，三标注全通
+  - 0174092：README 重写（零额度原生绘图卖点）
+    - 52d295a：delete_chart 进回收站；ensure_chart 改为同名删旧建新（真覆盖）
+    - b7a661d：move_file 移动图/文件夹
+    - 84152c0：README 补幂等文件管理说明
+  - 5.1 本轮新增文件管理闭环
+    - ensure_folder_path：先 list_files 查同名子目录，存在复用，否则建（修重复建目录 bug）
+    - delete_chart：POST /api/personal/folder/to_trash {fileType:chart, fileId, resource:diagrams}
+    - move_file：POST /api/personal/folder/move {fileType, fileId, targetFolderId}
+    - ensure_chart：同名 chart 先 delete_chart 再 create_chart，真覆盖不叠加
+    - 实测清理：旧废 outline 6aabc078/6aabc2aef 已进回收站
+  - 6. 核心突破
+    - 不依赖付费 AI 消费接口：LLM 自己组装原生形状 POST 到 canvas，0 额度消耗
+    - addConnection 崩图根因：省略几何坐标 → 前端渲染崩溃转圈
+  - 7. 验证结果（用户肉眼验收）
+    - 三标注图：https://www.processon.com/diagraming/6aabb1c62d87303e61261fee
+    - summary+boundary：https://www.processon.com/diagraming/6aabb0a1f620d2748a86ee4f
+    - GitHub：https://github.com/qingyuanLee/mcp_processon
+  - 8. 已知边界（3 项）
+    - markdown 文件正文 HTTP 写不进去（见二7）
+    - addConnection 用固定锚点模板，极端布局可能需手动微调
+    - ProcessOn 端异步渲染，超时 180s
+  - 9. 本轮新增（v1.1，2026-09-18）：分享链接生成能力
+    - share_chart(chart_id, permanent=True)：GET share/open 铸造 viewLinkId → POST update_link 设永久 → 拼 /view/link/{viewLinkId}
+    - MCP 工具 processon_share_chart；SKILL 工具表已登记；README 已更新
+    - 验证：新图生成、重复分享幂等、pon_mcp_v1 图返回 6aac9b3f83f77758981e636b 与你页面复制一致
+    - 测试图（share_test_*）已进回收站
+  - 10. 本轮新增（v1.2，2026-09-18）：连线线型支持
+    - make_link 增 link_type（broken 折线/normal 直连）与 line_style（solid/dashed/dot/dashdot）
+    - draw_flowchart 的 edges 支持 style/type 字段；MCP 工具、SKILL、README 同步更新
+    - 验证：新建图 4 种线型 × 2 种连线类型全部写入成功（接口返回 version:1）；测试图已进回收站
+  - 11. 本轮新增（v1.3，2026-09-18）：文字自适应 + 自动分层布局
+    - 文字自适应：_node_size 按文字像素宽度估算（CJK 1em / ASCII 0.55em / 标点 0.35em / 空格 0.3em，字号 14，行高 1.4）自动撑大盒子；三种形状 padding 不同（矩形 26/18、胶囊 48/18、菱形 34/34）
+    - 自动布局：_layered_layout = 最长路径分层（有环不死循环）→ barycenter 上下扫描 4 轮减交叉 → 层带坐标（横距 50 纵距 80），同层节点垂直居中
+    - 交叉兜底：_count_crossings 线段相交检测；仍交叉的边自动按 LINK_PALETTE 换色 + dashed/dot/dashdot 换线型；用户显式 style/color 优先
+    - edges 新增 color 字段（#hex 或 r,g,b）；theme 时页面尺寸按内容包围盒自适应
+    - 验证：离线 QA（长文字撑盒、菱形 0 交叉、无重叠）+ 真机（9 节点 11 边写入 version:3、渲染 20 个图形对象、文字完整分层清晰、并行线呈虚线）
+    - 测试图 layout_test_*（分享 https://www.processon.com/view/link/6aacd270c66afe02ff75e6f1 永久）保留待用户目视验收后回收
+  - 12. 本轮新增（v1.4，2026-09-18）：布局美感修复（层居中+锚点边接+折线绕层）
+    - 反馈：①线与节点框仍相交；②整图不对称、无美感
+    - 修复1 层水平居中：_layered_layout 两遍法，先测每层宽，每层按最宽层居中 → 主干垂直对称（样例各层中心 x 全 343）
+    - 修复2 锚点角度根因：ProcessOn linker 的 from/to.angle 是"节点中心指向锚点的方向角"（数学坐标 y 向上）；旧实现写死 from=0/to=π 致锚点错吸左右边、线斜穿框。正确：上下连 from=3π/2(底)/to=π/2(顶)，左右连 0/π；端点坐标同时改到节点边缘（底/顶/左/右边中点）
+    - 修复3 折线拐点走层间空隙：broken 的 points 是拐点，旧实现传端点等于没折；现走"竖→横→竖"，水平段落在紧接源节点底边的层间空隙（mid_y=src底+min(30,0.25·跨度)），不撞中间层节点
+    - 交叉兜底保留：跨层并行线（x→e、y→e）竖直段经主干列，ProcessOn 渲染时线在节点下层视觉上从背后绕过，仍交叉者自动染色+虚线
+    - 验证：离线（层中心全 343、锚点全在边、穿框仅跨层并行结构）+ 真机 version:3；新测试图 layout_v14_test 分享 https://www.processon.com/view/link/6aace59dc0bae4107ed3450b 永久
+  - 13. 本轮新增（v1.5，2026-09-21）：不拥挤保证 + 分组容器（架构图）
+    - 反馈：架构图节点挤在一起；节点间逻辑关系应用连线+大虚线框组合表示
+    - 间距加大：LAYOUT_GAP_X 50→80、LAYOUT_GAP_Y 80→110；新增 MIN_NODE_GAP=40 硬下限
+    - 碰撞分离 _separate_rects：贪心推开重叠/过近矩形（先量 x/y 间隙，推需移动更小的方向），对显式坐标重叠也兜底（QA：3 个重叠节点 before=3→after=0）
+    - 分组容器：nodes 加 group 字段（如"接入层"）→ 自动生成虚线透明大框包住组内节点（CONT_PAD=48 内边距）；可显式 {"id","label","container":true} 定标题；容器 zindex=0 在最底层
+    - 两阶段分离：先容器互推（组内节点随容器平移保 padding），再节点互推；容器永远包得住节点
+    - 验证：离线 0 冲突（节点间/容器间/容器包节点）+ 真机 version:3；测试图 arch_group_test 分享 https://www.processon.com/view/link/6ab0da75cb92f406f7f37dad 永久
+  - 14. 本轮修复（v1.6，2026-09-21）：分组架构图白屏转圈修复
+    - 故障：arch_group_test（6ab0da74...）打开一直转圈（服务端 version:3 但前端渲染崩溃），旧图已移回收站
+    - 根因：make_container 用了 name="container" + anchors=[]（空数组）——ProcessOn 前端按形状名分派渲染，"container" 形状分派找不到模板即崩，与历史"addConnection 缺几何坐标→白屏"同类（服务端 200 不代表前端能渲染）
+    - 修正：容器改回普通矩形（name="rectangle"、category="basic"、标准 4 锚点），只保留虚线 lineStyle.dashed + 空 fillStyle 视觉上的"大虚线框"；不赌未抓包形状语义
+    - 验证：新图 arch_group_test_v16 一次写入 version:3；分享 https://www.processon.com/view/link/6ab0dd0823868a0bc6a13c68 永久
+- 二、ProcessOn 接口关键知识（逆向实测）
+  - 1. 一句话结论：画图走私有 canvas/msg 接口，LLM 直接组节点；markdown 文档无公开写接口
+  - 2. 认证（两条线）
+    - AI 面：Authorization: Bearer sk-po-xxx（smart.processon.com/user 申请）
+    - 文件面：POST /api/personal/login/v2/account {account, password=MD5, ...} → data.token（JWT），后续请求头 token: <jwt>
+    - JWT payload 含 userId/fullName；过期自动重登
+  - 3. 文件与建图端点
+    - 建图：POST /api/personal/diagraming/create {folderId, category} → data.chart.{chartId, definitionId=pageId}
+    - category：flowbase / outline / mind_free / markdown
+    - 建文件夹：POST /api/personal/createFolder；列表：list_files；重命名：/api/personal/chart/rename
+  - 4. 三标注字段（已固化）
+    - summary：节点带 summary:"文字" → action addSummary，content {parent, range:"0,<子节点数>", id:uuid, title, summary:true}
+    - boundary：节点带 boundary:"外框名" → action addBoundary，content {parent, range:"<兄弟索引>,1", id:uuid, boundary:true}
+    - links：节点带 links:[{to,label}] → action addConnection，content 必须含完整模板 from/to/end/start/startAngle/endAngle/realStart/realEnd/pts/styles/id，顶层 editorVersion:"V2"，像素坐标传 0,0 让前端自动重排
+    - 一级分支颜色：MIND_COLORS=["#729B8D","#EED484","#E19873","#DFE8D7"] 循环
+  - 5. 三套写入端点
+    - flowbase：/api/personal/diagraming/canvas/v2/msg，action create 形状，setTheme 上色，updatePage 改背景+showGrid:false
+    - outline：/api/personal/outline/canvas/msg，root id 固定 "root"，parent 直接指父 id
+    - mind_free：/api/personal/mindmap/canvas/msg?mlfffid=<chartId>&mlffcid=<chartId>，form: msgStr+canvasId+chartId+ignore=msgStr+msgversion=v6
+  - 6. 官方通道
+    - 公开 API 仅 smart.processon.com/docs/mcp（AI 绘图），无 markdown 文档读写
+    - 企业开放 API 需签约商务；.pos 是图形交换格式
+  - 7. 死路清单（勿重复尝试）
+    - markdown 正文：hst/ver/manual/add 只存历史快照不切当前文档
+    - import/markdown：multipart 上传，字段盲试全 401 参数错误（实际是 JS 本地读文件，HTTP 不存在）
+    - sk-po token 调主站文件 API：408/403
+    - 盲探文件路径：全 404
+    - addConnection 省略几何坐标：整图前端崩溃转圈
+    - 手搓 markdown def 二进制版本链：服务端不认
+  - 8. 经验法则
+    - 盲试私有接口不超过两次，第三次前先抓真实请求
+    - 白屏/转圈先二分：纯树能开就是某个标注动作崩
+  - 9. 分享链接生成（实测 2026-09-18）
+    - 链接结构：https://www.processon.com/view/link/{viewLinkId}；viewLinkId 为 24 位 hex，服务端铸造，不可从 chartId 推导（私有图 viewLinkId=null）
+    - 开启分享：GET /api/personal/chart/share/open?chartId=<id> → data.viewLinkId（注意：POST 返回 405，方法与直觉相反）
+    - 永久有效：POST /api/personal/view/update_link/<id>，form chartId&expire=（空）→ expireTime=null
+    - 顺序敏感：未分享先调 update_link 报 code 820"分享协作链接不存在"
+    - 幂等：重复分享返回同一 viewLinkId
+    - 实测样本：6aabc5c98cf906122b808508 → 6aac9b3f83f77758981e636b；6aac9d4467be235e108cfb76 → 6aac9d456a29601cdfbe8129
+    - 死路：读 outline 内容无可用接口（diagraming/get 405/510、outline/canvas/load 404、diagraming/load 801），图更新只能追加分支
+  - 10. 连线线型与直连/折线（实测 2026-09-18）
+    - linkerType："normal"=直连（points 空数组，坐标在 from/to 的 x/y）；"broken"=折线（points 带两点）
+    - lineStyle.lineStyle：省略=实线；"dashed"=虚线；"dot"=点线；"dashdot"=点划线；改样式带 drawType:"none"
+    - 改样式走 action:"update" + updates[]；创建走 action:"create"；lineWidth 默认 1.5
+    - 已固化：make_link(link_type, line_style)，edges 支持 style/type
+  - 11. 布局与文字自适应（实测 2026-09-18）
+    - 节点文字溢出根因：旧实现固定 120×60 且 textBlock 无换行控制，长文字超框
+    - 解法：按字符宽度表估算像素宽（CJK=1em、ASCII=0.55em、标点=0.35em、空格=0.3em，字号 14 行高 1.4），_node_size 按行数撑大 w/h（textBlock 的 position.w 表达式仍为 "w-20"，前端按框宽折行）
+    - 布局算法：最长路径分层（有环时未入队节点取 max(pred)+1，避免死循环）→ barycenter 上下扫描 4 轮 → 层带水平排布、同层垂直居中；横距 50 纵距 80
+    - 交叉：线段相交检测（ccw 符号法）；仍交叉的边按参与顺序轮换 LINK_PALETTE（8 色 "r,g,b"）+ dashed/dot/dashdot，用户显式 style/color 不覆盖
+    - 观察：真机渲染显示 ProcessOn 可能对坐标做轻微重排（渲染位置与写入坐标有偏差），但层级与不重叠保持；"图形：N"计数可作写入完整性的读回替代（20=9 节点+11 边 ✓）
+  - 12. 布局美感修复（实测 2026-09-18）
+    - angle 语义（从抓包反推）：linker.from/to.angle = 从节点中心指向该锚点的方向角，数学坐标 y 向上（抓包 src 底锚点 angle=3π/2 实证）；写错会让 ProcessOn 锚点错吸到错误边，线斜穿节点框
+    - 上下连接：from=src底边中点 angle=3π/2，to=dst顶边中点 angle=π/2；同层左右：0/π
+    - broken 折线 points 是拐点不是端点：from→p1→p2→to；水平拐点放层间空隙（src底边下方 30px 内），避免水平段撞中间层节点框
+    - 层居中：先测每层总宽，每层 x 起点 = (最宽层宽 - 本层宽)/2，主干视觉居中对称
+  - 13. 不拥挤保证与分组容器（实测 2026-09-21）
+    - _rects_gap_ok：间隙 = max(左)-min(右)（正=分离、负=重叠）；要求 x 或 y 任一方向间隙 ≥ MIN_NODE_GAP(40)
+    - _separate_rects：贪心迭代（上限 80 次），每次推需要移动更小的方向；返回剩余违规数
+    - 容器生成 make_container：普通矩形路径 + lineStyle.dashed + 无 fill（fillStyle={}）+ 标题 textBlock 左上 (14,6,w-28,h22)，attribute.container 保持 False（无抓包不赌语义）
+    - 容器两阶段：容器互推后把位移加到组内节点，再节点互推——padding 不被破坏
+    - 跨组连线照常锚在节点边、穿过容器虚线框（透明背景视觉清晰）
+  - 14. 容器形状名陷阱（实测 2026-09-21）
+    - ProcessOn 前端按 shape.name 分派渲染逻辑：name="container" 是平台保留形状，无 children/正确 attribute 时整图白屏转圈（服务端 version:3 不报错）
+    - 安全做法：分组框 = name="rectangle"（category "basic"）+ lineStyle.dashed + fillStyle={}；anchors 必须给标准 4 锚点（top/bottom/left/right），空 anchors 数组是高危
+    - 教训复证：无抓包样本的新形状字段（category/attribute/anchors 组合）一律先最小化真机试开，再批量使用
+- 三、附：残留（待清理）
+  - ProcessOn 上：6aab8f1144c9916e9dd94f62 与 6aab8e3f44c9916e9dd94dd0 两个未确认文件夹；markdown 探针空文件若干
+  - 本地：临时探针脚本已清理
+  - 本轮（2026-09-18）：分享/线型测试图已进回收站；布局测试图 layout_test_* 保留待目视验收；v1 图以追加"四~六、本轮更新"分支方式同步
+  - README 已重写并 push（0174092）

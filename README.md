@@ -28,7 +28,20 @@ The output is always a **live, editable online diagram** — not a screenshot.
   canvas; no AI consumption, no bitmap.
 - **Three editor protocols, reverse-engineered and working:**
   - `flowbase` — flowcharts & architecture: rectangles, decision diamonds,
-    terminators, arrows, **4 built-in themes**, colored fills, hidden grid.
+    terminators, arrows with **4 line styles** (solid/dashed/dot/dashdot) and
+    straight (`normal`) or elbow (`broken`) routing, **auto-sized boxes** (long
+    labels wrap inside the shape), **layered auto-layout** (Sugiyama-style:
+    hierarchy layers + barycenter ordering to cut crossings; every layer is
+    centred on the widest band so the spine reads symmetrically), **no-crowding
+    guarantee** (boxes are never closer than a hard floor — crowded or
+    overlapping inputs are pushed apart), **dashed group containers** (give
+    nodes a `group` and the tool wraps them in a dashed transparent frame for
+    architecture layers/subsystems, with a light tinted background that
+    contrasts the dark node fills), **edges anchor on the frame edge** (correct
+    ProcessOn anchor angles — no lines cutting through boxes), elbow routes bend
+    in the inter-layer gap, remaining crossing lines get distinct colors and
+    dash styles automatically, **4 built-in themes**, colored fills, hidden
+    grid.
   - `outline` — outliner / thinking notes, root-level tree writing.
   - `mind_free` — real mindmaps with auto-colored branches.
 - **Mindmap annotations** — `summary` (概要), `boundary` (外框), and
@@ -38,6 +51,10 @@ The output is always a **live, editable online diagram** — not a screenshot.
   blocks are idempotent: `ensure_folder_path` reuses same-named folders,
   `ensure_chart` overwrites a same-named chart (delete + recreate), so rerunning
   never spawns duplicates. Via account login (JWT, auto re-auth on 401/408).
+- **Public share links** — `share_chart` opens sharing and mints the
+  `https://www.processon.com/view/link/{viewLinkId}` URL (the link id is
+  server-assigned, permanent by default, idempotent on re-share). Hand-rolled
+  against the private web API — no official SDK.
 - **Dual auth** — `sk-po-...` token for the AI surface, account+password for
   the personal file surface.
 - **Standard MCP** — tools over stdio (default) or Streamable HTTP, pluggable
@@ -78,9 +95,10 @@ processon-mcp --transport http --port 3100
 | `processon_create_chart` | Create an empty editable chart (`flowbase` / `outline` / `mind_free` / `markdown`) |
 | `processon_rename_chart` | Rename a chart |
 | `processon_move_file` / `processon_delete_chart` | Move charts/folders, delete chart to trash |
-| `processon_draw_flowchart` | **LLM draws native shapes + edges** into a chart, with a theme |
+| `processon_draw_flowchart` | **LLM draws native shapes + edges** into a chart — auto-sized boxes, layered auto-layout, crossing auto-recoloring, per-edge color, line styles, straight/elbow links, theme |
 | `processon_draw_mindmap` | Outline-style mind notes |
 | `processon_make_mindmap` | **Real mindmap** with colored branches + summary / boundary / links |
+| `processon_share_chart` | Open public sharing → return `https://www.processon.com/view/link/{viewLinkId}` (permanent by default) |
 | `processon_design_diagram` / `processon_render_mermaid` | Mermaid draft → editable render |
 | `processon_generate_chart` | One-shot natural-language chart (AI surface) |
 | `processon_md_to_mindmap` | Markdown → editable mindmap |
@@ -93,6 +111,12 @@ nodes=[{"id":"start","label":"开始","shape":"terminator"},
        {"id":"auth","label":"登录","shape":"rectangle"},
        {"id":"ok","label":"校验通过?","shape":"decision"}]
 edges=[{"from":"start","to":"auth"},{"from":"auth","to":"ok"}]
+# Boxes auto-size to labels; nodes auto-layout into hierarchy layers with
+# reduced crossings (omit x/y, or pass auto_layout=True).
+# optional per edge: "style": "solid"|"dashed"|"dot"|"dashdot",
+#                    "type": "broken"|"normal"  (elbow vs straight),
+#                    "color": "#RRGGBB"|"r,g,b"
+# Lines that still cross get distinct colors + dash styles automatically.
 ```
 
 Every shape is a native ProcessOn object — click it in the browser and edit text,
