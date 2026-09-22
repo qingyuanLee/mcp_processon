@@ -524,6 +524,62 @@ class ProcessOnClient:
         }
 
     # ------------------------------------------------------------------
+    # Chart definition read-back (diagraming/get/chart/def)
+    # ------------------------------------------------------------------
+
+    def get_chart_def(self, chart_id: str) -> Dict[str, Any]:
+        """Read a chart back as its full editable definition.
+
+        This is ProcessOn's server-side read-back: resolve the defId
+        (canvas/get/chartdefids) then fetch the raw elements JSON
+        (diagraming/get/chart/def). Returns:
+          {"chartId","defId","meta","elements": {id: shape-or-link}}.
+
+        Note: ProcessOn's "export to .vsdx" runs purely in the browser
+        (visio.sdk.umd.js converts the definition client-side; there is no
+        server download endpoint). To get a real .vsdx file, open the chart
+        in a browser and use its Export -> Visio menu; this method gives
+        you the same underlying definition programmatically.
+        """
+        cd = self._web_call("GET", "/api/personal/canvas/get/chartdefids",
+                            params={"chartId": chart_id})
+        canvas = cd.get("canvas", {})
+        def_id = canvas.get("mainCanvasId") or (
+            (canvas.get("chartDefIds") or [{}])[0].get("definitionId"))
+        if not def_id:
+            raise ProcessOnError(f"No defId found for chart {chart_id}: {cd}")
+        raw = self._web_call("GET", "/api/personal/diagraming/get/chart/def",
+                             params={"chartId": chart_id, "defId": def_id})
+        def_json = raw.get("def")
+        elements = {}
+        if isinstance(def_json, str):
+            try:
+                parsed = json.loads(def_json)
+                elements = parsed.get("elements", parsed)
+            except Exception:
+                elements = {"_raw": def_json}
+        elif isinstance(def_json, dict):
+            elements = def_json.get("elements", def_json)
+        return {
+            "chartId": chart_id,
+            "defId": def_id,
+            "meta": cd.get("chart", {}),
+            "elements": elements,
+        }
+
+    def export_chart_to_vsdx(self, chart_id: str, out_path: str) -> str:
+        """Read a chart back and render it to a local .vsdx (Visio) file.
+
+        Combines get_chart_def with vsdx_exporter: no Visio required, pure
+        Python. Returns the out_path. Only covers shapes our flowchart tool
+        produces (rectangle/diamond/terminator nodes, linker edges, containers).
+        """
+        from .vsdx_exporter import export_def_to_vsdx
+        info = self.get_chart_def(chart_id)
+        title = (info.get("meta") or {}).get("title") or "ProcessOn Diagram"
+        return export_def_to_vsdx(info["elements"], out_path, page_name=title)
+
+    # ------------------------------------------------------------------
     # Canvas drawing (write shapes/links into an editable chart)
     # ------------------------------------------------------------------
     # We build ProcessOn's native "create" messages. A chart's pageId is its

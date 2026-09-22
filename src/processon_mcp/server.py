@@ -385,6 +385,63 @@ def processon_share_chart(
 
 
 @mcp.tool()
+def processon_get_chart_def(
+    chart_id: str,
+) -> str:
+    """Read a chart back as its full editable definition (nodes/links JSON).
+
+    Resolves the defId and fetches the raw elements from ProcessOn, so you can
+    inspect, validate, or diff what was drawn. NOTE: ProcessOn exports .vsdx
+    purely in the browser (visio.sdk converts client-side; no server download
+    endpoint). To get a real .vsdx, open the chart in a browser and use
+    Export -> Visio; this returns the same underlying definition.
+
+    Args:
+        chart_id: The chart's id (from processon_create_chart / list_files).
+    """
+    client = _get_client()
+    try:
+        info = client.get_chart_def(chart_id)
+    except ProcessOnAuthError as e:
+        return f"认证失败：{e.msg}。请配置 PROCESSON_ACCOUNT / PROCESSON_PASSWORD。"
+    except ProcessOnError as e:
+        return f"读回图定义失败：{e.msg}"
+    els = info["elements"]
+    return (f"读回成功：chartId={info['chartId']}\n"
+            f"defId={info['defId']}\n"
+            f"元素数={len(els)}\n"
+            f"（.vsdx 导出请在浏览器打开图后用「导出→Visio」，"
+            f"ProcessOn 无服务端下载接口）")
+
+
+@mcp.tool()
+def processon_export_vsdx(
+    chart_id: str,
+    out_path: str,
+) -> str:
+    """Read a chart back and render it to a local .vsdx (Visio) file in Python.
+
+    No Visio install needed: the chart definition is fetched and converted to a
+    standalone .vsdx (Open Packaging zip) locally. Covers rectangle / decision /
+    terminator nodes, linker edges and group containers.
+
+    Args:
+        chart_id: The chart's id (from processon_create_chart / list_files).
+        out_path: Local path to write the .vsdx file (e.g. r"D:\arch.vsdx").
+    """
+    client = _get_client()
+    try:
+        path = client.export_chart_to_vsdx(chart_id, out_path)
+    except ProcessOnAuthError as e:
+        return f"认证失败：{e.msg}。"
+    except ProcessOnError as e:
+        return f"导出失败：{e.msg}"
+    except Exception as e:
+        return f"导出失败：{e}"
+    return f"已导出 .vsdx：{path}"
+
+
+@mcp.tool()
 def processon_draw_flowchart(
     chart_id: str,
     page_id: str,
