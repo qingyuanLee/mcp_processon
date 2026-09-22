@@ -581,42 +581,20 @@ class ProcessOnClient:
 
     def export_chart_to_jpg(self, chart_id: str, out_path: str,
                             export_type: str = "jpghd") -> Dict[str, Any]:
-        """Export a chart's preview JPG and return its public share link.
+        """Open public sharing for a chart and return its online link.
 
-        Reverse-engineered from the web app: ProcessOn renders the high-res
-        JPG on the *frontend* (canvas + watermark -> blob: URL), so there is no
-        server-side "return high-res JPG bytes" endpoint. What the server does
-        expose is the preview image (netest.jpg on KS3 CDN). We download that
-        preview and simultaneously open public sharing so the caller gets a
-        viewable online link.
+        Note: ProcessOn renders JPG/PNG exports on the *frontend* (canvas +
+        watermark -> blob: URL). There is no server-side "return image bytes"
+        endpoint, and netest.jpg on KS3 is a network-test placeholder, not the
+        chart preview. So this tool opens public sharing and returns the
+        viewable online link instead of a local image file.
 
-        Returns {"path", "size", "shareUrl"}.
+        Returns {"chartId", "shareUrl"}.
         """
-        import time
-        # step 1: download the preview image from KS3 CDN
-        url = (
-            f"https://ks3-cn-beijing.ksyun.com/mind-files/netest.jpg"
-            f"?_u={int(time.time()*1000)}")
-        resp = self._web_session().get(url, timeout=30)
-        if resp.status_code != 200 or len(resp.content) < 500:
-            raise ProcessOnError(
-                f"preview fetch failed: HTTP {resp.status_code}, "
-                f"{len(resp.content)} bytes")
-        with open(out_path, "wb") as f:
-            f.write(resp.content)
-
-        # step 2: open public sharing (best-effort; never fail the export)
-        share_url = ""
-        try:
-            info = self.share_chart(chart_id, permanent=True)
-            share_url = info.get("shareUrl", "")
-        except Exception:
-            pass
-
+        info = self.share_chart(chart_id, permanent=True)
         return {
-            "path": out_path,
-            "size": len(resp.content),
-            "shareUrl": share_url,
+            "chartId": chart_id,
+            "shareUrl": info.get("shareUrl", ""),
         }
 
     # ------------------------------------------------------------------

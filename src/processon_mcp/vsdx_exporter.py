@@ -207,17 +207,22 @@ def export_def_to_vsdx(elements: Dict[str, Any], out_path: str,
             geom = _rect_geom(wi, hi)
         fill = _rgb_to_visio((n.get("fillStyle") or {}).get("color"), "#005B99")
         line = _rgb_to_visio((n.get("lineStyle") or {}).get("lineColor"), "#004370")
-        # containers (light-blue frames) -> keep fill but dark top text
-        no_fill = _is_container_frame(n)
-        if no_fill:
+        # containers: light-blue SOLID fill (224,234,244), dark text on top.
+        # Do NOT set no_fill here — the frame is a filled rectangle, not a
+        # transparent dashed box. Only normal node labels are light-on-dark.
+        is_frame = _is_container_frame(n)
+        if is_frame:
+            no_fill = False
             tcolor = "#333333"
+            text_top = True
         else:
-            # ProcessOn node labels are light on dark fill
+            no_fill = False
+            text_top = False
             tcolor = _rgb_to_visio((n.get("fontStyle") or {}).get("color"),
                                    "#E9F1F9")
         shape_xmls.append(_shape_xml(sid, pin_x, pin_y, wi, hi, geom,
                                      _text_of(n), fill, line, no_fill=no_fill,
-                                     text_color=tcolor, text_top=no_fill))
+                                     text_color=tcolor, text_top=text_top))
         sid += 1
 
     for l in links:
