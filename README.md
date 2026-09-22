@@ -56,7 +56,11 @@ The output is always a **live, editable online diagram** — not a screenshot.
   `https://www.processon.com/view/link/{viewLinkId}` URL (the link id is
   server-assigned, permanent by default, idempotent on re-share). Hand-rolled
   against the private web API — no official SDK.
-- **Chart read-back + .vsdx export** — `processon_get_chart_def` reads a chart's
+- **Chart read-back + .vsdx export**
+- **Server-side high-res JPG export** — `processon_export_jpg` triggers
+  ProcessOn's own export pipeline (`/chart/export/get/user/power`,
+  exportType=jpghd), then polls for the KS3 CDN URL and streams the bytes.
+  Gives a real 135KB+ PNG-quality JPG without a browser. — `processon_get_chart_def` reads a chart's
   full element JSON back from ProcessOn (`chartdefids` → `chart/def`);
   `processon_export_vsdx` renders it to a standalone **.vsdx (Visio)** file in
   pure Python (no Visio install): rectangles / diamonds / terminators, linker
@@ -111,6 +115,7 @@ processon-mcp --transport http --port 3100
 | `processon_md_to_mindmap` | Markdown → editable mindmap |
 | `processon_get_chart_def` | Read a chart's full element JSON back (chartdefids + chart/def) |
 | `processon_export_vsdx` | Read chart def → render to a local `.vsdx` (Visio) file |
+| `processon_export_jpg` | Trigger server-side export → stream high-res `.jpg` to local path |
 
 ### LLM-led flowchart, end to end
 
@@ -150,6 +155,9 @@ nodes=[
   files use a collaborative document format with no public write API.
 - Mindmap links use a fixed anchor template; extreme layouts may need manual nudging.
 - Rendering is async on ProcessOn's side (seconds), timeout 180s.
+- `.jpg` export: the power-trigger endpoint works (returns a task id); the exact
+  polling path for the CDN download URL is not yet fully confirmed — if polling
+  fails, fall back to the browser Export → JPG menu.
 - `.vsdx` export targets **Visio / drawio** (offline editing/archive). Round-tripping
   the .vsdx *back into* ProcessOn may lose styling, since ProcessOn's own importer
   simplifies shapes and folds groups — that is its importer's behaviour, not an export bug.
