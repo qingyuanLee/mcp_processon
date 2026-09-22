@@ -57,7 +57,37 @@
   - v1 是"三编辑器打通"（能画）；v2 是"画得好看"（不挤、分组、层次）
   - 复用 v1 的 _shape/make_node/make_link，只在 draw_flowchart 加分组与分离层
 
-## 三、文件与归档
+## 三、vsdx 导出（v2 新增）
 
-- 代码：src/processon_mcp/processon_client.py（_separate_rects、make_container、两阶段布局、THEMES.container_fill）
+### 能力
+- `processon_get_chart_def(chart_id)`：读回图定义
+  - `canvas/get/chartdefids` 拿 mainCanvasId/definitionId
+  - `diagraming/get/chart/def?defId=...` 拿完整 elements JSON（纠正"ProcessOn 无读回接口"旧认知）
+- `processon_export_vsdx(chart_id, out_path)`：读回 + 纯 Python 渲染成 .vsdx（Visio）
+  - `vsdx_exporter.py`：纯标准库 zipfile 生成 OPC zip（9 个部件）
+  - 覆盖：矩形/菱形/胶囊节点、linker 折线连线、分组容器
+  - 坐标：PPI=96，像素→英寸，y 轴翻转；颜色 r,g,b→#RRGGBB
+
+### 关键发现
+- **vsdx 无服务端下载接口**：`visio.sdk.umd.js`（850KB）grep 无任何 /api 调用——纯前端 mxGraph→VSDX 转换库，浏览器现场转
+- **开源 Python 三选**：`vsdx` 库（读强写弱）、`bpmn-to-visio`（真从零生成 OPC，最佳参考，已卸载）、`aspose-diagram`（商业付费）。选 A：自写最小 OPC 生成器
+
+### 渲染踩坑（四轮迭代，drawio 实测验证）
+- v1：节点文字写死白色 + 漏 TextBlock 单元格（TxtPinX/Y/W/H/LocPin）→ 文字看不见/乱跑
+- v2：补 TextBlock、文字按节点实际色、容器深字
+- v3：显式 FillPattern=1 实心填充 + 容器文字移到框顶部
+- **v4 真根因（z-order）**：drawio/ProcessOn 把"被大矩形容器盖住的下层节点"识别成容器子形状→丢弃
+  - 原以为 attribute.container 判定容器，**实测全是 False**——判定错了
+  - 真正的容器是 fillColor="224,234,244" 的浅蓝矩形（字符串色值，非 list）
+  - 修复：按 fillColor 识别容器，**容器排最底层、节点排上层、连线最后**
+  - 验证：drawio 导入后 13 节点全显示（接入层3+业务层4+数据层3+客户端等）
+
+### 边界
+- .vsdx 主要用途 Visio/drawio 线下编辑/存档
+- 导回 ProcessOn 往返会丢样式（ProcessOn 导入器简化形状/折叠组，非导出 bug）
+
+## 四、文件与归档
+
+- 代码：src/processon_mcp/processon_client.py（_separate_rects、make_container、两阶段布局、THEMES.container_fill、get_chart_def、export_chart_to_vsdx）
+- 新增：src/processon_mcp/vsdx_exporter.py（纯 Python OPC 生成器）
 - 本档：pon_mcp_v2.md（本地唯一源）；幕布同步同名文档；ProcessOn v1 归档图追加分支

@@ -56,6 +56,12 @@ The output is always a **live, editable online diagram** — not a screenshot.
   `https://www.processon.com/view/link/{viewLinkId}` URL (the link id is
   server-assigned, permanent by default, idempotent on re-share). Hand-rolled
   against the private web API — no official SDK.
+- **Chart read-back + .vsdx export** — `processon_get_chart_def` reads a chart's
+  full element JSON back from ProcessOn (`chartdefids` → `chart/def`);
+  `processon_export_vsdx` renders it to a standalone **.vsdx (Visio)** file in
+  pure Python (no Visio install): rectangles / diamonds / terminators, linker
+  edges, group frames, px→inch conversion, y-flip, centered text. Designed for
+  Visio / drawio; containers render bottom-most so covered nodes aren't dropped.
 - **Dual auth** — `sk-po-...` token for the AI surface, account+password for
   the personal file surface.
 - **Standard MCP** — tools over stdio (default) or Streamable HTTP, pluggable
@@ -103,6 +109,8 @@ processon-mcp --transport http --port 3100
 | `processon_design_diagram` / `processon_render_mermaid` | Mermaid draft → editable render |
 | `processon_generate_chart` | One-shot natural-language chart (AI surface) |
 | `processon_md_to_mindmap` | Markdown → editable mindmap |
+| `processon_get_chart_def` | Read a chart's full element JSON back (chartdefids + chart/def) |
+| `processon_export_vsdx` | Read chart def → render to a local `.vsdx` (Visio) file |
 
 ### LLM-led flowchart, end to end
 
@@ -142,6 +150,9 @@ nodes=[
   files use a collaborative document format with no public write API.
 - Mindmap links use a fixed anchor template; extreme layouts may need manual nudging.
 - Rendering is async on ProcessOn's side (seconds), timeout 180s.
+- `.vsdx` export targets **Visio / drawio** (offline editing/archive). Round-tripping
+  the .vsdx *back into* ProcessOn may lose styling, since ProcessOn's own importer
+  simplifies shapes and folds groups — that is its importer's behaviour, not an export bug.
 
 ## 🏗️ Structure
 
