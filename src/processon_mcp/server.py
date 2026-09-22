@@ -442,6 +442,31 @@ def processon_export_vsdx(
 
 
 @mcp.tool()
+def processon_export_jpg(
+    chart_id: str,
+    out_path: str,
+    export_type: str = "jpghd",
+) -> str:
+    """Export a chart to a high-res JPG via ProcessOn's server pipeline.
+
+    Args:
+        chart_id: The chart's id.
+        out_path: Local path to write the .jpg file (e.g. r"D:\arch.jpg").
+        export_type: "jpghd" (high-res, VIP) or "jpg" (normal).
+    """
+    client = _get_client()
+    try:
+        path = client.export_chart_to_jpg(chart_id, out_path, export_type)
+    except ProcessOnAuthError as e:
+        return f"认证失败：{e.msg}。"
+    except ProcessOnError as e:
+        return f"导出失败：{e.msg}"
+    except Exception as e:
+        return f"导出失败：{e}"
+    return f"已导出 JPG：{path}"
+
+
+@mcp.tool()
 def processon_draw_flowchart(
     chart_id: str,
     page_id: str,

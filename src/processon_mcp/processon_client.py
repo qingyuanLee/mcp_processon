@@ -579,6 +579,73 @@ class ProcessOnClient:
         title = (info.get("meta") or {}).get("title") or "ProcessOn Diagram"
         return export_def_to_vsdx(info["elements"], out_path, page_name=title)
 
+    def export_chart_to_jpg(self, chart_id: str, out_path: str,
+                            export_type: str = "jpghd") -> str:
+        """Export a chart to a high-res JPG via ProcessOn's server pipeline.
+
+        Two-step (reverse-engineered from the web app):
+          1. GET /api/personal/chart/export/get/user/power?chartId=..&exportType=jpghd
+             -> returns a task id (data field).
+          2. Poll for the KS3 CDN download URL, then stream the bytes.
+
+        export_type: "jpghd" (high-res JPG, VIP) or "jpg" (normal).
+        Returns the out_path.
+        """
+        import time
+        import urllib.request
+
+        # step 1: trigger export, get task id
+        power = self._web_call(
+            "GET", "/api/personal/chart/export/get/user/power",
+            params={"chartId": chart_id, "exportType": export_type})
+        task_id = power if isinstance(power, str) else (
+            power.get("taskId") or power.get("data") or "")
+        if not task_id:
+            raise ProcessOnError(
+                f"export power did not return a task id: {power!r}")
+
+        # step 2: poll for the CDN download URL. ProcessOn's frontend polls a
+        # result endpoint; the exact path varies, so we try the known candidates
+        # until one returns a usable http(s) URL.
+        download_url = ""
+        poll_paths = [
+            "/api/personal/chart/export/get/result",
+            "/api/personal/chart/export/get/poll",
+            "/api/personal/chart/export/get/status",
+            "/api/personal/chart/export/get/info",
+        ]
+        deadline = time.time() + 60
+        while time.time() < deadline:
+            for pp in poll_paths:
+                try:
+                    d = self._web_call("GET", pp, params={
+                        "chartId": chart_id, "exportType": export_type,
+                        "taskId": task_id})
+                    url = d.get("url") or d.get("fileUrl") or d.get("downloadUrl") or ""
+                    if isinstance(url, str) and url.startswith("http"):
+                        download_url = url
+                        break
+                except Exception:
+                    continue
+            if download_url:
+                break
+            time.sleep(2)
+
+        if not download_url:
+            raise ProcessOnError(
+                f"could not resolve download URL for task {task_id} "
+                f"(polling endpoint not found); open the chart in a browser "
+                f"and use Export -> JPG")
+
+        # step 3: stream bytes to out_path (CDN, no auth needed)
+        req = urllib.request.Request(
+            download_url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            data = resp.read()
+        with open(out_path, "wb") as f:
+            f.write(data)
+        return out_path
+
     # ------------------------------------------------------------------
     # Canvas drawing (write shapes/links into an editable chart)
     # ------------------------------------------------------------------
