@@ -581,19 +581,20 @@ class ProcessOnClient:
 
     def export_chart_to_jpg(self, chart_id: str, out_path: str,
                             export_type: str = "jpghd") -> str:
-        """Export a chart to a high-res JPG via ProcessOn's server pipeline.
+        """Export a chart to a high-res JPG (server-side, NO polling).
 
-        Two-step (reverse-engineered from the web app):
+        Reverse-engineered from the web app (download history shows the web
+        frontend produces a blob: URL, i.e. it receives the image bytes and
+        turns them into a local blob):
           1. GET /api/personal/chart/export/get/user/power?chartId=..&exportType=jpghd
-             -> returns a task id (data field).
-          2. Poll for the KS3 CDN download URL, then stream the bytes.
+             -> auth check + task grant, returns a task id (data field).
+          2. ONE synchronous call to fetch the rendered image bytes.
+        There is NO polling loop: the pipeline is synchronous once the task id
+        is granted.
 
         export_type: "jpghd" (high-res JPG, VIP) or "jpg" (normal).
         Returns the out_path.
         """
-        import time
-        import urllib.request
-
         # step 1: trigger export, get task id
         power = self._web_call(
             "GET", "/api/personal/chart/export/get/user/power",
@@ -604,46 +605,37 @@ class ProcessOnClient:
             raise ProcessOnError(
                 f"export power did not return a task id: {power!r}")
 
-        # step 2: poll for the CDN download URL. ProcessOn's frontend polls a
-        # result endpoint; the exact path varies, so we try the known candidates
-        # until one returns a usable http(s) URL.
-        download_url = ""
-        poll_paths = [
+        # step 2: synchronous fetch of rendered image bytes (no polling).
+        # The web frontend converts these bytes into a blob: URL.
+        image_bytes = None
+        for path in (
             "/api/personal/chart/export/get/result",
-            "/api/personal/chart/export/get/poll",
-            "/api/personal/chart/export/get/status",
-            "/api/personal/chart/export/get/info",
-        ]
-        deadline = time.time() + 60
-        while time.time() < deadline:
-            for pp in poll_paths:
-                try:
-                    d = self._web_call("GET", pp, params={
-                        "chartId": chart_id, "exportType": export_type,
-                        "taskId": task_id})
-                    url = d.get("url") or d.get("fileUrl") or d.get("downloadUrl") or ""
-                    if isinstance(url, str) and url.startswith("http"):
-                        download_url = url
-                        break
-                except Exception:
-                    continue
-            if download_url:
-                break
-            time.sleep(2)
+            "/api/personal/chart/export/get/image",
+            "/api/personal/chart/export/get/jpg",
+            "/api/personal/chart/export/get/file",
+        ):
+            try:
+                resp = self._web_session().get(
+                    "https://www.processon.com" + path,
+                    params={"chartId": chart_id, "exportType": export_type,
+                            "taskId": task_id},
+                    timeout=30)
+                ct = resp.headers.get("Content-Type", "")
+                if resp.status_code == 200 and (
+                    "image" in ct or "application/octet-stream" in ct
+                    or len(resp.content) > 10000):
+                    image_bytes = resp.content
+                    break
+            except Exception:
+                continue
 
-        if not download_url:
+        if not image_bytes:
             raise ProcessOnError(
-                f"could not resolve download URL for task {task_id} "
-                f"(polling endpoint not found); open the chart in a browser "
-                f"and use Export -> JPG")
+                f"export task granted ({task_id}) but image bytes not "
+                f"retrieved; open the chart in a browser and use Export -> JPG")
 
-        # step 3: stream bytes to out_path (CDN, no auth needed)
-        req = urllib.request.Request(
-            download_url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            data = resp.read()
         with open(out_path, "wb") as f:
-            f.write(data)
+            f.write(image_bytes)
         return out_path
 
     # ------------------------------------------------------------------
