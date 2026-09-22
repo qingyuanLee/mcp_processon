@@ -155,9 +155,6 @@ nodes=[
   files use a collaborative document format with no public write API.
 - Mindmap links use a fixed anchor template; extreme layouts may need manual nudging.
 - Rendering is async on ProcessOn's side (seconds), timeout 180s.
-- `.jpg` export: the power-trigger endpoint works (returns a task id); the exact
-  polling path for the CDN download URL is not yet fully confirmed — if polling
-  fails, fall back to the browser Export → JPG menu.
 - `.vsdx` export targets **Visio / drawio** (offline editing/archive). Round-tripping
   the .vsdx *back into* ProcessOn may lose styling, since ProcessOn's own importer
   simplifies shapes and folds groups — that is its importer's behaviour, not an export bug.

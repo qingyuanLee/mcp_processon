@@ -86,26 +86,6 @@
 - .vsdx 主要用途 Visio/drawio 线下编辑/存档
 - 导回 ProcessOn 往返会丢样式（ProcessOn 导入器简化形状/折叠组，非导出 bug）
 
-## 三点五、jpg 高清导出（v2 新增）
-
-### 能力
-- `processon_export_jpg(chart_id, out_path, export_type="jpghd")`
-  - step1：调 `/api/personal/chart/export/get/user/power?chartId=..&exportType=jpghd`
-    触发服务端导出，返回 task id（**已验证可用**）
-  - step2：轮询拿 KS3 CDN 下载 URL
-  - step3：流式下载到本地
-- 实测：浏览器手动导出得 135KB jpg（arch_route_test）
-
-### 当前状态（诚实记录）
-- power 触发接口已跑通（返回 task id 如 `v2_f96cee4c...`）
-- **轮询下载 URL 接口未完全摸清**：试了 result/poll/status/info 四个路径全 404
-- 当前方法 60 秒轮询失败后报错提示"用浏览器导出"
-- 后续：需在浏览器 DevTools 抓"文件→导出→JPG"完整请求链，补进 poll_paths
-
-### 边界
-- export_type: jpghd（高清 VIP）/ jpg（普通）
-- 与 vsdx 导出互补：jpg 是位图预览，vsdx 是矢量可编辑
-
 ## 四、文件与归档
 
 - 代码：src/processon_mcp/processon_client.py（_separate_rects、make_container、两阶段布局、THEMES.container_fill、get_chart_def、export_chart_to_vsdx）

@@ -579,24 +579,6 @@ class ProcessOnClient:
         title = (info.get("meta") or {}).get("title") or "ProcessOn Diagram"
         return export_def_to_vsdx(info["elements"], out_path, page_name=title)
 
-    def export_chart_to_jpg(self, chart_id: str, out_path: str,
-                            export_type: str = "jpghd") -> Dict[str, Any]:
-        """Open public sharing for a chart and return its online link.
-
-        Note: ProcessOn renders JPG/PNG exports on the *frontend* (canvas +
-        watermark -> blob: URL). There is no server-side "return image bytes"
-        endpoint, and netest.jpg on KS3 is a network-test placeholder, not the
-        chart preview. So this tool opens public sharing and returns the
-        viewable online link instead of a local image file.
-
-        Returns {"chartId", "shareUrl"}.
-        """
-        info = self.share_chart(chart_id, permanent=True)
-        return {
-            "chartId": chart_id,
-            "shareUrl": info.get("shareUrl", ""),
-        }
-
     # ------------------------------------------------------------------
     # Canvas drawing (write shapes/links into an editable chart)
     # ------------------------------------------------------------------

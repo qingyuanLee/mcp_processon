@@ -442,39 +442,6 @@ def processon_export_vsdx(
 
 
 @mcp.tool()
-def processon_export_jpg(
-    chart_id: str,
-    out_path: str = "",
-    export_type: str = "jpghd",
-) -> str:
-    """Open public sharing for a chart and return its viewable online link.
-
-    ProcessOn renders JPG exports on the frontend (canvas + watermark -> blob),
-    so there is no server-side image-bytes endpoint. This tool opens permanent
-    public sharing and returns the link you can open in any browser to view,
-    download, or embed the chart.
-
-    Args:
-        chart_id: The chart's id.
-        out_path: kept for compatibility (unused; no local file written).
-        export_type: kept for compatibility (unused).
-    """
-    client = _get_client()
-    try:
-        info = client.export_chart_to_jpg(chart_id, out_path, export_type)
-    except ProcessOnAuthError as e:
-        return f"认证失败：{e.msg}。"
-    except ProcessOnError as e:
-        return f"导出失败：{e.msg}"
-    except Exception as e:
-        return f"导出失败：{e}"
-    lines = [f"图表已开启公开分享：{info['chartId']}"]
-    if info.get("shareUrl"):
-        lines.append(f"查看/下载链接：{info['shareUrl']}")
-    return "\n".join(lines)
-
-
-@mcp.tool()
 def processon_draw_flowchart(
     chart_id: str,
     page_id: str,
