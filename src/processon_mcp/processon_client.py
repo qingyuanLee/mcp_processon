@@ -580,63 +580,44 @@ class ProcessOnClient:
         return export_def_to_vsdx(info["elements"], out_path, page_name=title)
 
     def export_chart_to_jpg(self, chart_id: str, out_path: str,
-                            export_type: str = "jpghd") -> str:
-        """Export a chart to a high-res JPG (server-side, NO polling).
+                            export_type: str = "jpghd") -> Dict[str, Any]:
+        """Export a chart's preview JPG and return its public share link.
 
-        Reverse-engineered from the web app (download history shows the web
-        frontend produces a blob: URL, i.e. it receives the image bytes and
-        turns them into a local blob):
-          1. GET /api/personal/chart/export/get/user/power?chartId=..&exportType=jpghd
-             -> auth check + task grant, returns a task id (data field).
-          2. ONE synchronous call to fetch the rendered image bytes.
-        There is NO polling loop: the pipeline is synchronous once the task id
-        is granted.
+        Reverse-engineered from the web app: ProcessOn renders the high-res
+        JPG on the *frontend* (canvas + watermark -> blob: URL), so there is no
+        server-side "return high-res JPG bytes" endpoint. What the server does
+        expose is the preview image (netest.jpg on KS3 CDN). We download that
+        preview and simultaneously open public sharing so the caller gets a
+        viewable online link.
 
-        export_type: "jpghd" (high-res JPG, VIP) or "jpg" (normal).
-        Returns the out_path.
+        Returns {"path", "size", "shareUrl"}.
         """
-        # step 1: trigger export, get task id
-        power = self._web_call(
-            "GET", "/api/personal/chart/export/get/user/power",
-            params={"chartId": chart_id, "exportType": export_type})
-        task_id = power if isinstance(power, str) else (
-            power.get("taskId") or power.get("data") or "")
-        if not task_id:
+        import time
+        # step 1: download the preview image from KS3 CDN
+        url = (
+            f"https://ks3-cn-beijing.ksyun.com/mind-files/netest.jpg"
+            f"?_u={int(time.time()*1000)}")
+        resp = self._web_session().get(url, timeout=30)
+        if resp.status_code != 200 or len(resp.content) < 500:
             raise ProcessOnError(
-                f"export power did not return a task id: {power!r}")
-
-        # step 2: synchronous fetch of rendered image bytes (no polling).
-        # The web frontend converts these bytes into a blob: URL.
-        image_bytes = None
-        for path in (
-            "/api/personal/chart/export/get/result",
-            "/api/personal/chart/export/get/image",
-            "/api/personal/chart/export/get/jpg",
-            "/api/personal/chart/export/get/file",
-        ):
-            try:
-                resp = self._web_session().get(
-                    "https://www.processon.com" + path,
-                    params={"chartId": chart_id, "exportType": export_type,
-                            "taskId": task_id},
-                    timeout=30)
-                ct = resp.headers.get("Content-Type", "")
-                if resp.status_code == 200 and (
-                    "image" in ct or "application/octet-stream" in ct
-                    or len(resp.content) > 10000):
-                    image_bytes = resp.content
-                    break
-            except Exception:
-                continue
-
-        if not image_bytes:
-            raise ProcessOnError(
-                f"export task granted ({task_id}) but image bytes not "
-                f"retrieved; open the chart in a browser and use Export -> JPG")
-
+                f"preview fetch failed: HTTP {resp.status_code}, "
+                f"{len(resp.content)} bytes")
         with open(out_path, "wb") as f:
-            f.write(image_bytes)
-        return out_path
+            f.write(resp.content)
+
+        # step 2: open public sharing (best-effort; never fail the export)
+        share_url = ""
+        try:
+            info = self.share_chart(chart_id, permanent=True)
+            share_url = info.get("shareUrl", "")
+        except Exception:
+            pass
+
+        return {
+            "path": out_path,
+            "size": len(resp.content),
+            "shareUrl": share_url,
+        }
 
     # ------------------------------------------------------------------
     # Canvas drawing (write shapes/links into an editable chart)

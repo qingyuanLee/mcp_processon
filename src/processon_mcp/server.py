@@ -447,23 +447,29 @@ def processon_export_jpg(
     out_path: str,
     export_type: str = "jpghd",
 ) -> str:
-    """Export a chart to a high-res JPG via ProcessOn's server pipeline.
+    """Export a chart's preview JPG and return its public share link.
+
+    Downloads the chart preview image (KS3 CDN) and simultaneously opens
+    public sharing so you get both a local JPG file and a viewable online link.
 
     Args:
         chart_id: The chart's id.
         out_path: Local path to write the .jpg file (e.g. r"D:\arch.jpg").
-        export_type: "jpghd" (high-res, VIP) or "jpg" (normal).
+        export_type: kept for compatibility (preview image is the same).
     """
     client = _get_client()
     try:
-        path = client.export_chart_to_jpg(chart_id, out_path, export_type)
+        info = client.export_chart_to_jpg(chart_id, out_path, export_type)
     except ProcessOnAuthError as e:
         return f"认证失败：{e.msg}。"
     except ProcessOnError as e:
         return f"导出失败：{e.msg}"
     except Exception as e:
         return f"导出失败：{e}"
-    return f"已导出 JPG：{path}"
+    lines = [f"JPG 已导出：{info['path']}", f"文件大小：{info['size']} 字节"]
+    if info.get("shareUrl"):
+        lines.append(f"公开分享链接：{info['shareUrl']}")
+    return "\n".join(lines)
 
 
 @mcp.tool()
