@@ -1264,6 +1264,142 @@ class ProcessOnClient:
         )
 
     # ------------------------------------------------------------------
+    # Layered architecture diagram (no-link, block layout, ipe-data style)
+    # ------------------------------------------------------------------
+    ROUND_PATH = [{"actions": [
+        {"action": "move", "x": "0", "y": "4"},
+        {"action": "quadraticCurve", "x": "4", "y": "0", "x1": "0", "y1": "0"},
+        {"action": "line", "x": "w-4", "y": "0"},
+        {"action": "quadraticCurve", "x": "w", "y": "4", "x1": "w", "y1": "0"},
+        {"action": "line", "x": "w", "y": "h-4"},
+        {"action": "quadraticCurve", "x": "w-4", "y": "h", "x1": "w", "y1": "h"},
+        {"action": "line", "x": "4", "y": "h"},
+        {"action": "quadraticCurve", "x": "0", "y": "h-4", "x1": "0", "y1": "h"},
+        {"action": "close"},
+    ]}]
+
+    def make_roundrect(self, title: str, x: float, y: float,
+                       w: float, h: float, zindex: int = 2) -> Dict[str, Any]:
+        """White filled rounded module, no border, dark bold centered text.
+
+        Captured from a real ipe-data-style architecture chart:
+          fillStyle {color 255,255,255 solid}, lineColor none, font 51,51,51
+          size 14 bold center-middle. Radius 4 via quadraticCurve corners.
+        """
+        shape = self._shape("roundRectangle", "basic", title, x, y, w, h,
+                            self.ROUND_PATH, zindex)
+        shape["fillStyle"] = {"color": "255,255,255", "type": "solid"}
+        shape["lineStyle"] = {"lineColor": "none", "lineWidth": 0}
+        shape["fontStyle"] = {"color": "51,51,51", "size": 14,
+                              "textAlign": "center", "bold": True,
+                              "vAlign": "middle"}
+        return shape
+
+    def draw_layered_arch(self, chart_id: str, page_id: str,
+                          title: str, layers: list,
+                          left_label_width: float = 160.0,
+                          module_h: float = 70.0, layer_pad: float = 15.0,
+                          layer_gap: float = 12.0, margin: float = 27.0,
+                          canvas_w: float = 1360.0) -> Dict[str, Any]:
+        """Draw a no-link layered architecture diagram (ipe-data style).
+
+        Pure block layout: an outer bordered frame, a title bar, then one row
+        of rounded modules per layer. An optional left label per layer names
+        the layer. No connectors are drawn — grouping and layering express the
+        structure, exactly like the ipe-data reference chart.
+
+        layers: [{"name": "应用层" (optional left label),
+                  "modules": ["模型推理服务", "预测分析应用", ...]}]
+        """
+        inner_w = canvas_w - 2 * margin
+        shapes: List[Dict[str, Any]] = []
+        z = 1
+
+        # measure total height
+        cursor = margin + 45  # after title bar
+        layer_rows = []
+        for layer in layers:
+            has_label = bool(layer.get("name"))
+            content_x = margin + (left_label_width + layer_gap if has_label else 0)
+            content_w = inner_w - (left_label_width + layer_gap if has_label else 0)
+            mods = layer.get("modules", [])
+            gap = 20.0
+            mw = (content_w - (len(mods) - 1) * gap) / max(len(mods), 1)
+            lh = module_h + 2 * layer_pad
+            layer_rows.append((layer, has_label, content_x, content_w, mw, gap, lh))
+            cursor += lh + layer_gap
+        total_h = cursor - margin + layer_gap
+
+        # outer frame
+        frame = self._shape("rectangle", "basic", "", margin, margin,
+                            inner_w, total_h,
+                            [{"actions": [
+                                {"action": "move", "x": "0", "y": "0"},
+                                {"action": "line", "x": "w", "y": "0"},
+                                {"action": "line", "x": "w", "y": "h"},
+                                {"action": "line", "x": "0", "y": "h"},
+                                {"action": "close", "y": "0"}]}], z)
+        frame["fillStyle"] = {"type": "none"}
+        frame["lineStyle"] = {"lineColor": "91,121,232", "lineWidth": 1.5}
+        shapes.append(frame); z += 1
+
+        # title bar (dark blue fill, white bold text)
+        tbar = self._shape("rectangle", "basic", title, margin, margin,
+                           inner_w, 45,
+                           [{"actions": [
+                               {"action": "move", "x": "0", "y": "0"},
+                               {"action": "line", "x": "w", "y": "0"},
+                               {"action": "line", "x": "w", "y": "h"},
+                               {"action": "line", "x": "0", "y": "h"},
+                               {"action": "close", "y": "0"}]}], z)
+        tbar["fillStyle"] = {"color": "91,121,232", "type": "solid"}
+        tbar["lineStyle"] = {"lineColor": "none", "lineWidth": 0}
+        tbar["fontStyle"] = {"color": "255,255,255", "size": 18,
+                             "textAlign": "center", "bold": True,
+                             "vAlign": "middle"}
+        shapes.append(tbar); z += 1
+
+        # layers
+        y = margin + 45
+        for layer, has_label, content_x, content_w, mw, gap, lh in layer_rows:
+            # optional left layer label (light tint, vertical centered text)
+            if has_label:
+                lbl = self._shape("rectangle", "basic", layer["name"],
+                                  margin, y, left_label_width, lh,
+                                  [{"actions": [
+                                      {"action": "move", "x": "0", "y": "0"},
+                                      {"action": "line", "x": "w", "y": "0"},
+                                      {"action": "line", "x": "w", "y": "h"},
+                                      {"action": "line", "x": "0", "y": "h"},
+                                      {"action": "close", "y": "0"}]}], z)
+                lbl["fillStyle"] = {"color": "235,241,252", "type": "solid"}
+                lbl["lineStyle"] = {"lineColor": "none", "lineWidth": 0}
+                lbl["fontStyle"] = {"color": "60,90,180", "size": 14,
+                                    "textAlign": "center", "bold": True,
+                                    "vAlign": "middle"}
+                shapes.append(lbl); z += 1
+
+            # rounded modules
+            mods = layer.get("modules", [])
+            mx = content_x
+            for m in mods:
+                shapes.append(self.make_roundrect(
+                    m, mx, y + layer_pad, mw, module_h, zindex=z))
+                z += 1
+                mx += mw + gap
+            y += lh + layer_gap
+
+        messages = [{"action": "create", "content": shapes, "pageId": page_id}]
+        msg = [{"action": "command", "messages": messages,
+                "name": "", "pageId": page_id}]
+        return self._web_call(
+            "POST",
+            f"/api/personal/diagraming/canvas/v2/msg?mlfffid={chart_id}&mlffcid={chart_id}",
+            data={"msgStr": json.dumps(msg, ensure_ascii=False),
+                  "canvasId": chart_id, "chartId": chart_id,
+                  "ignore": "msgStr", "msgversion": ""})
+
+    # ------------------------------------------------------------------
     # Outline / mindmap (tree editor, NOT the shape canvas)
     # ------------------------------------------------------------------
     # Separate editor: POST /api/personal/outline/canvas/msg. A chart created

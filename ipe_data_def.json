@@ -1,0 +1,8056 @@
+{
+  "chartId": "6a2688c032835d64b89ab0c4",
+  "defId": "6a2688c032835d64b89ab0c7",
+  "meta": {
+    "chartId": "6a2688c032835d64b89ab0c4",
+    "title": "ipe-data",
+    "definitionId": "6a2688c032835d64b89ab0c7",
+    "owner": {
+      "userId": "5e4211d0e4b05c26bea5e6f5",
+      "userName": "5e4211d0e4b05c26bea5e6f4",
+      "fullName": "liqy181"
+    },
+    "ownerId": "5e4211d0e4b05c26bea5e6f5",
+    "description": "",
+    "category": "uml",
+    "categoryParent": "flow",
+    "thumbnail": "6a2688c032835d64b89ab0c5",
+    "imgOriginal": "6a2688c032835d64b89ab0c6",
+    "shapeCount": 9,
+    "status": "private",
+    "folderId": "67c6cbba7180904eb9a7c09a",
+    "language": null,
+    "version": 7,
+    "tags": null,
+    "teamId": null,
+    "schema": [
+      "uml2_5_common",
+      "uml2_5_usecase",
+      "uml2_5_sequence",
+      "uml2_5_class",
+      "uml2_5_activity",
+      "uml2_5_component"
+    ],
+    "viewLinkId": null,
+    "cloneId": null,
+    "cloneTime": null,
+    "newCreate": true,
+    "corpid": null,
+    "sortNum": -21.0,
+    "likeCount": 0,
+    "commentCount": 0,
+    "favouriteCount": 0,
+    "viewCount": 0,
+    "cloneCount": 0,
+    "publicClonePrice": 0.0,
+    "orgId": null,
+    "collaRole": "editor",
+    "sourceName": null,
+    "createTime": "2026-06-08 17:17:52",
+    "lastModify": "2026-06-08 17:21:03",
+    "publicClone": false,
+    "canvasCount": 0,
+    "deleteTime": null,
+    "addShortAccess": false,
+    "belongtoTeam": false,
+    "openColla": false,
+    "openLinkColla": false,
+    "favourite": false
+  },
+  "elements": {
+    "QjqtFrwKyy970923": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": ""
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "0,0,0",
+        "size": 13,
+        "textAlign": "center",
+        "bold": false,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "lMtByVmgAI860115",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "WOhOhFRGid285891",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "UkhYgKXVCb111008",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "jksKXgDrIQ576308",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "GNbafYpWfF580158",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 1,
+        "w": 1360,
+        "h": 740,
+        "x": 27,
+        "y": 36.444444444448436,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "91,121,232",
+        "lineWidth": 1.5
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "type": "none"
+      },
+      "theme": {},
+      "id": "QjqtFrwKyy970923",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "LTABBNBlON974656": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "数据可视化"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 20,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "lxnPnjSZBb338350",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "eKcDjqxuAC793721",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "ThqCjuwBGb970844",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "OGahvptjBJ060620",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "QIjNjtuizM185032",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 7,
+        "w": 278.75,
+        "h": 70,
+        "x": 794.5,
+        "y": 111.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "LTABBNBlON974656",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "dXpQEjaRWw978336": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "特征工程(Pandas/Scipy)"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 14,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "aesCYyjjVg383214",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "nAklVuaeti154448",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "ZPtylFlrfb173382",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "BjAvCoTUhI253738",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "wdUcWyQHTr112998",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 28,
+        "w": 188.0369509269323,
+        "h": 83.33333333333333,
+        "x": 557.3517523697824,
+        "y": 344.7777777777819,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "dXpQEjaRWw978336",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "HwbUacFMzY182052": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "度"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "255,255,255",
+        "size": 32,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "ZeFKyeiJbu269693",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "GHDNvSdhmc136288",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "qOyIXdGDJM209659",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "SDWDCzAosu488035",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "WUMbASjATZ032329",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 13,
+        "w": 131,
+        "h": 44.999999999999886,
+        "x": 31,
+        "y": 417.94444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "type": "none"
+      },
+      "theme": {},
+      "id": "HwbUacFMzY182052",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "OffCGsSeho826001"
+    },
+    "LfBuOOVwNP099271": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "第三方API"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 18,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "QGdPMjrOmf830755",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "oqPwKifHiY642956",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "YqUjyBsKhy441146",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "xxrtzrdmWv850542",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "XaFOUBtqSX545462",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 48,
+        "w": 278.75,
+        "h": 60,
+        "x": 794.5,
+        "y": 691.4444444444489,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "LfBuOOVwNP099271",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "qVEEhuflRU866083": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "数据质量管理(P<br>andas、Numpy)"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 16,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "SGvJLGBdkS318033",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "IFzTVHoUUt509550",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "qQMxsbCceF681177",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "qEvDYejsoc569566",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "tEwypnDIRh611744",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 18,
+        "w": 180.80476050666564,
+        "h": 50,
+        "x": 189.71540600622882,
+        "y": 332.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "qVEEhuflRU866083",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "avWGsFYzyv273108": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "数据接入<br>"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "255,255,255",
+        "size": 22,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "gsECByemod445050",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "zAHvAquFGV355540",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "qzhkQeJxRV163094",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "bevMLEMmiu175801",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "AYGDhqeQHL456021",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 38,
+        "w": 156.69745910577691,
+        "h": 72,
+        "x": 400.65429326400545,
+        "y": 473.7777777777819,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "type": "none"
+      },
+      "theme": {},
+      "id": "avWGsFYzyv273108",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "LJSawzTIfB018608": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "数据共享存储(GFS/NAS)"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 18,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "KaXzcfkYUU260539",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "JiQuxDJbZd028815",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "zhtYaEKTwa942297",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "DdLiqFSblP710123",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "JjvoKGvxRS254885",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 42,
+        "w": 278.75,
+        "h": 60,
+        "x": 623.625,
+        "y": 591.4444444444484,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "LJSawzTIfB018608",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "AOLKyCDNzm166584": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "数据标准管理(P<br>andas、Numpy)"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 16,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "YxoKkoNjDS784637",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "MSXECFPvKa312660",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "uWIVMQjyCE032607",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "wThLGZKhNV406042",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "AVMTqqDJUs102460",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 17,
+        "w": 180.80476050666564,
+        "h": 50,
+        "x": 189.71540600622882,
+        "y": 272.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "AOLKyCDNzm166584",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "wqTwzNmNlm408928": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": ""
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "0,0,0",
+        "size": 13,
+        "textAlign": "center",
+        "bold": false,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "npXdjawUHC750374",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "HgOTwYeafw448952",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "qUGwurSKVP001815",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "DgJiKRdJBH856659",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "txsGQITTHu619475",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 44,
+        "w": 1360,
+        "h": 90,
+        "x": 27,
+        "y": 676.4444444444489,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "color": "79,147,235",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "wqTwzNmNlm408928",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "uzpzfGbLSK476897": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "数据应用"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "255,255,255",
+        "size": 28,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "IYhwDVNTJK474785",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "mzfdfHjuIm868530",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "pKzgnpssEk192475",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "dRylahcCDg103351",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "FpRpEehBbj408070",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 4,
+        "w": 180,
+        "h": 50,
+        "x": 37,
+        "y": 116.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "type": "none"
+      },
+      "theme": {},
+      "id": "uzpzfGbLSK476897",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "QrCUbCQDnF711591": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "在线推理服务"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 16,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "IyiiRivlyp642767",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "KkdKVUelBi935143",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "uigMqMvqto826162",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "zpJQVdwJPk065788",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "UytvakyMhu086758",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 24,
+        "w": 188.0369509269323,
+        "h": 83.33333333333333,
+        "x": 962.3544159047135,
+        "y": 221.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "QrCUbCQDnF711591",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "ivBwqjYgDo138649": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "数据处理<br>与建模"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "255,255,255",
+        "size": 22,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "fWCOkWKFek274192",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "kePopZtykc288575",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "ifRUSivhFo517006",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "DUEbfpJEkV681186",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "mmKrfaINWP538313",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 32,
+        "w": 156.69745910577691,
+        "h": 72,
+        "x": 400.65429326400545,
+        "y": 350.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "type": "none"
+      },
+      "theme": {},
+      "id": "ivBwqjYgDo138649",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "aJQsXGbSMH760774": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "元数据管理"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 18,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "lHbnSiehrJ046536",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "RcBzCkSudO703692",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "PyRGFRcEKg169857",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "vvLJLyaYIB194686",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "JFDJjinZFb706283",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 19,
+        "w": 180.80476050666564,
+        "h": 50,
+        "x": 189.71540600622882,
+        "y": 392.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "aJQsXGbSMH760774",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "mdFZwFeiyf988747": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "Python生态(Pandas/NumPy)"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 18,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "VcFvwvKEmW798597",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "kTadiANutv286060",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "JMTbVhgrSW889018",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "nRXuWhCRwq109214",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "zaNuLAehjt424944",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 41,
+        "w": 278.75,
+        "h": 60,
+        "x": 238.25,
+        "y": 591.4444444444484,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "mdFZwFeiyf988747",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "cuNVUUrgou517281": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "API接口调用(RESTf\nul)"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 14,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "uUApsCNdXK620221",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "yIPUWWwbBi562337",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "OFxAkReLfx544308",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "JfIWsdedRx082844",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "BQdBqHPZvv412525",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 35,
+        "w": 188.0369509269323,
+        "h": 83.33333333333333,
+        "x": 759.853084137248,
+        "y": 468.11111111111495,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "cuNVUUrgou517281",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "KJCRszpQSy379182": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "数据格式解析"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 16,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "spuSlVIczz601544",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "EtVgJLKlxB612004",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "uAlYQYcFmN243701",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "dHXqTqrsey493686",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "qZhgaQQLog099070",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 36,
+        "w": 188.0369509269323,
+        "h": 83.33333333333333,
+        "x": 962.3544159047135,
+        "y": 468.11111111111495,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "KJCRszpQSy379182",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "JMLZTXbcVr599978": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "调"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "255,255,255",
+        "size": 32,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "IJLWIRkdgJ736550",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "ILdUOWnABS874583",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "XMCNZoretq721643",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "VRRojlJAJE853446",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "gKxwrEOLHv097473",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 12,
+        "w": 131,
+        "h": 44.999999999999886,
+        "x": 31,
+        "y": 372.94444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "type": "none"
+      },
+      "theme": {},
+      "id": "JMLZTXbcVr599978",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "OffCGsSeho826001"
+    },
+    "uiBBIzeYVs786079": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "业务数据库"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 18,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "EcVAUApXif963553",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "htUEqqjleM053550",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "oBGvXWaPmU367695",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "amndDWXMRR550599",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "XjnoAvLPET856350",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 46,
+        "w": 278.75,
+        "h": 60,
+        "x": 207,
+        "y": 691.4444444444489,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "uiBBIzeYVs786079",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "rmPhCsuszv861193": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "预测分析应用"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 20,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "ieSIjrCYfg295646",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "gXiUazePAh768320",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "hlKAhfJYaO342970",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "udTMCWAiPW475085",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "ApDcbpEpKn024291",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 6,
+        "w": 278.75,
+        "h": 70,
+        "x": 500.75,
+        "y": 111.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "rmPhCsuszv861193",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "vIvinLgnLc044372": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "模型测试框架"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 16,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "OcIaOctBER541861",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "HYsrCSFkXS427266",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "ytCJmHxOpw230958",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "pzlXbOmJtX823579",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "xiIaykbhnO139282",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 25,
+        "w": 188.0369509269323,
+        "h": 83.33333333333333,
+        "x": 1164.855747672179,
+        "y": 221.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "vIvinLgnLc044372",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "icFLyMeMQk249940": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": ""
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "0,0,0",
+        "size": 13,
+        "textAlign": "center",
+        "bold": false,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "WiIhHHZiZt039477",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "qbazDYADlI217543",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "ouEWMPzbKA483998",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "xEahlCLScy796632",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "EQZnZMGOzr440091",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 21,
+        "w": 976.3457067359947,
+        "h": 113.33333333333334,
+        "x": 400.65429326400545,
+        "y": 206.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "color": "248,155,55",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "icFLyMeMQk249940",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "FynazYiGDU940025": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": ""
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "0,0,0",
+        "size": 13,
+        "textAlign": "center",
+        "bold": false,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "mFQlaIXLeQ024222",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "iDLJTUVoSj725753",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "YAoXSdbpJM161423",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "dYTMIqTNos448170",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "desDgEeLrh316029",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 3,
+        "w": 1360,
+        "h": 100,
+        "x": 27,
+        "y": 96.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "color": "6,101,178",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "FynazYiGDU940025",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "sqXOmnQobP193088": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "数据资产目录"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 18,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "KlGbRWgNBS567480",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "DXsQASuWHM513986",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "KCOlXhyfNO115548",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "aqwvFFjFfm627423",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "LCJeJiTwGY752120",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 20,
+        "w": 180.80476050666564,
+        "h": 50,
+        "x": 189.71540600622882,
+        "y": 452.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "sqXOmnQobP193088",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "wojgLZjzEY242342": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "数据转换(Pandas/NumPy)"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 16,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "GXQBcJbCIM156805",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "dGMzeUfPLF963688",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "IJTSAnsIZM321262",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "XNrDuKSWIX322134",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "nwGxZvgTFN737033",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 30,
+        "w": 188.0369509269323,
+        "h": 83.33333333333333,
+        "x": 962.3544159047135,
+        "y": 344.7777777777819,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "wojgLZjzEY242342",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "YAnMGsQput927835": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "IPE-DATA 平台架构"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 45,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "ubBfZUrGCd040071",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "CZZfKXIyvk909124",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "IexsxYNrZQ236455",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "oyzKjqLlUB281836",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "eUmrLtwvfg187281",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 2,
+        "w": 1360,
+        "h": 45,
+        "x": 27,
+        "y": 46.444444444448436,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "type": "none"
+      },
+      "theme": {},
+      "id": "YAnMGsQput927835",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "jAgaCgxHgV286464": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "务"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "255,255,255",
+        "size": 32,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "jfJTLHSlDP582200",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "GNvShHEaEz691449",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "xHaTJxkPxi395894",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "ABklcffvQG712514",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "sqmtRmEBQM424640",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 11,
+        "w": 131,
+        "h": 44.999999999999886,
+        "x": 31,
+        "y": 327.94444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "type": "none"
+      },
+      "theme": {},
+      "id": "jAgaCgxHgV286464",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "OffCGsSeho826001"
+    },
+    "FyzxlaTEAz786582": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "数据缓存(Redis)"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 16,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "GSsWsJrOzl532558",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "QRhNsmqSRj980975",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "yWtReXpQxo854974",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "npZnIBHrVf674155",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "vqRajlXAzP508554",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 37,
+        "w": 188.0369509269323,
+        "h": 83.33333333333333,
+        "x": 1164.855747672179,
+        "y": 468.11111111111495,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "FyzxlaTEAz786582",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "hxByZvkSPe588365": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": ""
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "0,0,0",
+        "size": 13,
+        "textAlign": "center",
+        "bold": false,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "KJfMYmdyHg298790",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "bBgfXFXxVZ837105",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "CpFHkxIhaR253995",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "LQAwYOkKwj221811",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "KwkZLMdCoB516522",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 9,
+        "w": 131,
+        "h": 359.9999999999991,
+        "x": 31,
+        "y": 206.4444444444489,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "color": "127,190,78",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "hxByZvkSPe588365",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "OffCGsSeho826001"
+    },
+    "nsfAznsEzm994935": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": ""
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "0,0,0",
+        "size": 13,
+        "textAlign": "center",
+        "bold": false,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "zzmlZxNgvR671154",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "mRUtIfOZDR867061",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "TmNIZzXFOd908221",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "PHdOdryhYH467051",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "sdDFVYHaLs343608",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 27,
+        "w": 976.3457067359947,
+        "h": 113.33333333333334,
+        "x": 400.65429326400545,
+        "y": 329.7777777777819,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "color": "248,155,55",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "nsfAznsEzm994935",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "ipahLrWfBz903697": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": ""
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "0,0,0",
+        "size": 13,
+        "textAlign": "center",
+        "bold": false,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "POYTLaVJzP209515",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "FkBpWNyydk046902",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "vYjqqMozyS608433",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "rCEMqVFBei087873",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "MGQzVWKftW858034",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 39,
+        "w": 1360,
+        "h": 90,
+        "x": 27,
+        "y": 576.4444444444484,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "color": "6,101,178",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "ipahLrWfBz903697",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "QKBRbKesvt852414": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "模型推理服务"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 20,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "kGDDnuAZAe005097",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "oguzrgJjNY485043",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "YQkgFHafNI932675",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "wmVcYsxEJl636604",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "btGvppdJoD642830",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 5,
+        "w": 278.75,
+        "h": 70,
+        "x": 207,
+        "y": 111.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "QKBRbKesvt852414",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "jOvvqDGahd742947": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "模型训练\n与应用"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "255,255,255",
+        "size": 22,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "znhMNRjdpk999740",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "SFLzTxunob618136",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "AaENeRFkBX338318",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "CfdpXwxcjx134386",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "MpYxJHsKxZ861498",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 26,
+        "w": 156.69745910577691,
+        "h": 72,
+        "x": 400.65429326400545,
+        "y": 227.11111111111495,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "type": "none"
+      },
+      "theme": {},
+      "id": "jOvvqDGahd742947",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "uRRRhrNtCJ407994": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": ""
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "0,0,0",
+        "size": 13,
+        "textAlign": "center",
+        "bold": false,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "zKofnHuFqf773882",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "yQMgVnommD465575",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "rAnGRAZfDy618067",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "embJKiaYwX756426",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "sESgIJImkV760119",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 15,
+        "w": 216.9657126079988,
+        "h": 360,
+        "x": 171.63492995556226,
+        "y": 206.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "color": "2,149,222",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "uRRRhrNtCJ407994",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "NOpPznNSNg836849": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "关系数据库(MySQL)"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 18,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "LOibBDMwxI686186",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "mchbvIKFNc222133",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "kVrrzSsZGK701486",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "KbhqgkeNXr707638",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "DXWtSBbGbd905702",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 43,
+        "w": 278.75,
+        "h": 60,
+        "x": 1033.25,
+        "y": 591.4444444444484,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "NOpPznNSNg836849",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "iHrJihOXHd948080": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "redis"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "255,255,255",
+        "size": 19,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "oNiUeXLGoj426548",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "hfyYLBhcnx026488",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "ZEHOMVvHkH110697",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "lJcPGMkEPi638593",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "sSCGUxQqJb852256",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 14,
+        "w": 131,
+        "h": 44.999999999999886,
+        "x": 31,
+        "y": 462.9444444444489,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "type": "none"
+      },
+      "theme": {},
+      "id": "iHrJihOXHd948080",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "OffCGsSeho826001"
+    },
+    "YOgrZLanQS379726": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "计算与存储引\n擎"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "255,255,255",
+        "size": 24,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "tzeFZgKPYN515556",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "qESlHJphmt530292",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "ZIAIYqVdUg553324",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "AzowYqKyVK186811",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "qDndNBenFz521395",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 40,
+        "w": 180,
+        "h": 40,
+        "x": 37,
+        "y": 596.4444444444484,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "type": "none"
+      },
+      "theme": {},
+      "id": "YOgrZLanQS379726",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "RQhpSllLBE067252": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "分布式文件系统(GFS/NAS)"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 18,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "NtjjkvafxX900338",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "sjRWUKELqg116773",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "wEANxGEJjh056897",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "zZLzTRbzZo777076",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "NChoFYqHrp585982",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 49,
+        "w": 278.75,
+        "h": 60,
+        "x": 1088.25,
+        "y": 691.4444444444489,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "RQhpSllLBE067252",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "GNbEaxyCkS129890": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "日志文件"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 18,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "iXhNAYhKhv653928",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "ZLehvKVVYv796247",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "detojXhVMC043105",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "jOpZSiMIgF091170",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "zSvoBxWpCn187621",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 47,
+        "w": 278.75,
+        "h": 60,
+        "x": 500.75,
+        "y": 691.4444444444489,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "GNbEaxyCkS129890",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "USbUYkmphs792237": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "API服务网关"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 20,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "FxKiZvNgRO268430",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "XMTccibJEJ742808",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "kwLADdDeCR058020",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "hqmWhNOLZS423002",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "VsQVHrHKsa882473",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 8,
+        "w": 278.75,
+        "h": 70,
+        "x": 1088.25,
+        "y": 111.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "USbUYkmphs792237",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "xnJFUujtgz947100": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "数据源"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "255,255,255",
+        "size": 24,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "NbkNbCSBhz515317",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "tpVGobnTQH914335",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "ytHyyPpuHz761989",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "bnPmFRwUIQ219864",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "oWFCkEQMkz534062",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 45,
+        "w": 180,
+        "h": 40,
+        "x": 37,
+        "y": 696.4444444444489,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "type": "none"
+      },
+      "theme": {},
+      "id": "xnJFUujtgz947100",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": ""
+    },
+    "sHIJAMqWsM515242": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "批数据导入(GFS/NAS<br>)"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 14,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "lFcrBatfpJ039822",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "IyYEmqRtTD612727",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "JrIyMKvQDc375944",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "aqhDSZzMSJ415906",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "ZZIzUwbzee999601",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 34,
+        "w": 188.0369509269323,
+        "h": 83.33333333333333,
+        "x": 557.3517523697824,
+        "y": 468.11111111111495,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "sHIJAMqWsM515242",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "rvrbxujqvD995775": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "数据管理"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "255,255,255",
+        "size": 22,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "hNvMKptBDN517342",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "zlJlKaooWM546741",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "tNQWsdwrnF919728",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "EyGIyqcFdK885972",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "haAvKJdJOv259602",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 16,
+        "w": 216.9657126079988,
+        "h": 36,
+        "x": 171.63492995556226,
+        "y": 226.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "type": "none"
+      },
+      "theme": {},
+      "id": "rvrbxujqvD995775",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "XnVBFbmYwR201596": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "模型训练引擎"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 16,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "scTvUYESIr258058",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "HUaUhoWoBD961246",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "zbXrRvsawI688393",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "yixpeMwMOl940588",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "FNVLEDCkbU212606",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 22,
+        "w": 188.0369509269323,
+        "h": 83.33333333333333,
+        "x": 557.3517523697824,
+        "y": 221.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "XnVBFbmYwR201596",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "NGIDHiBhzE524700": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "模型版本管理"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 16,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "KBCDgEiaVd664302",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "OwYUroGLMF793422",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "oFKPDVfrRx673672",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "pfapBETiby044320",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "FpdLUCvVws720722",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 23,
+        "w": 188.0369509269323,
+        "h": 83.33333333333333,
+        "x": 759.853084137248,
+        "y": 221.44444444444844,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "NGIDHiBhzE524700",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "TAXfwPMbCv048961": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "数据清洗(Pandas)"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 14,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "VnQzUvTdfh992460",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "RXsMQTLpfE236012",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "idefqoQaGb913119",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "zrSpiTNOQa099078",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "HeUnwGjiIp443766",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 29,
+        "w": 188.0369509269323,
+        "h": 83.33333333333333,
+        "x": 759.853084137248,
+        "y": 344.7777777777819,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "TAXfwPMbCv048961",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "ULCWuyEcUW732699": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "任"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "255,255,255",
+        "size": 32,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "uRvBahPbyO767194",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "mxjBeaQlho377774",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "kHUGnfbOmC110147",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "shvwdGXTdI006979",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "RmLwZIASvl591553",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 10,
+        "w": 131,
+        "h": 44.999999999999886,
+        "x": 31,
+        "y": 282.9444444444489,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "type": "none"
+      },
+      "theme": {},
+      "id": "ULCWuyEcUW732699",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "OffCGsSeho826001"
+    },
+    "gxeQZGUjcc228254": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": "模型构建(Sklearn)"
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "51,51,51",
+        "size": 14,
+        "textAlign": "center",
+        "bold": true,
+        "vAlign": "middle"
+      },
+      "title": "圆角矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "hTYUKHhyyd587700",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "oAbIyGUFHE780396",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "zIVehBEPzZ288213",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "IBIxgpBAdR892218",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "SZlfhafdlf137811",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 31,
+        "w": 188.0369509269323,
+        "h": 83.33333333333333,
+        "x": 1164.855747672179,
+        "y": 344.7777777777819,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "4"
+            },
+            {
+              "y1": "0",
+              "x": "4",
+              "action": "quadraticCurve",
+              "y": "0",
+              "x1": "0"
+            },
+            {
+              "x": "w-4",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "y1": "0",
+              "x": "w",
+              "action": "quadraticCurve",
+              "y": "4",
+              "x1": "w"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h-4"
+            },
+            {
+              "y1": "h",
+              "x": "w-4",
+              "action": "quadraticCurve",
+              "y": "h",
+              "x1": "w"
+            },
+            {
+              "x": "4",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "y1": "h",
+              "x": "0",
+              "action": "quadraticCurve",
+              "y": "h-4",
+              "x1": "0"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "roundRectangle",
+      "fillStyle": {
+        "color": "255,255,255",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "gxeQZGUjcc228254",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    },
+    "dCZspJTQYC851353": {
+      "parent": "",
+      "link": "",
+      "shapeStyle": {
+        "alpha": 1
+      },
+      "textBlock": [
+        {
+          "position": {
+            "w": "w-20",
+            "h": "h",
+            "x": 10,
+            "y": 0
+          },
+          "text": ""
+        }
+      ],
+      "anchors": [
+        {
+          "x": "w/2",
+          "y": "0"
+        },
+        {
+          "x": "w/2",
+          "y": "h"
+        },
+        {
+          "x": "0",
+          "y": "h/2"
+        },
+        {
+          "x": "w",
+          "y": "h/2"
+        }
+      ],
+      "fontStyle": {
+        "color": "0,0,0",
+        "size": 13,
+        "textAlign": "center",
+        "bold": false,
+        "vAlign": "middle"
+      },
+      "title": "矩形",
+      "dataAttributes": [
+        {
+          "name": "序号",
+          "id": "WvceEYMCoJ919851",
+          "category": "default",
+          "type": "number",
+          "value": ""
+        },
+        {
+          "name": "名称",
+          "id": "vhVUsIahlq991426",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "所有者",
+          "id": "TmKHkenHjh051298",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "连接",
+          "id": "mDDjdLgpBD828171",
+          "category": "default",
+          "type": "link",
+          "value": ""
+        },
+        {
+          "name": "便笺",
+          "id": "SXiadPDPvz363488",
+          "category": "default",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "props": {
+        "zindex": 33,
+        "w": 976.3457067359947,
+        "h": 113.33333333333334,
+        "x": 400.65429326400545,
+        "y": 453.11111111111495,
+        "angle": 0
+      },
+      "path": [
+        {
+          "actions": [
+            {
+              "x": "0",
+              "action": "move",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "0"
+            },
+            {
+              "x": "w",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "x": "0",
+              "action": "line",
+              "y": "h"
+            },
+            {
+              "action": "close"
+            }
+          ]
+        }
+      ],
+      "lineStyle": {
+        "lineColor": "none",
+        "lineWidth": 0
+      },
+      "children": [],
+      "resizeDir": [
+        "tl",
+        "tr",
+        "br",
+        "bl"
+      ],
+      "name": "rectangle",
+      "fillStyle": {
+        "color": "248,155,55",
+        "type": "solid"
+      },
+      "theme": {},
+      "id": "dCZspJTQYC851353",
+      "attribute": {
+        "container": false,
+        "rotatable": true,
+        "visible": true,
+        "collapsable": false,
+        "collapsed": false,
+        "linkable": true,
+        "markerOffset": 5
+      },
+      "category": "basic",
+      "locked": false,
+      "group": "SgYJjxYeHd701143"
+    }
+  }
+}

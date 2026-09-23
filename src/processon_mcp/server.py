@@ -503,6 +503,39 @@ def processon_draw_flowchart(
 
 
 @mcp.tool()
+def processon_draw_layered_arch(
+    chart_id: str,
+    page_id: str,
+    title: str,
+    layers: list,
+) -> str:
+    """Draw a no-link layered architecture diagram (ipe-data style).
+
+    Pure block layout: outer bordered frame + title bar + one row of rounded
+    white modules per layer. No connectors - layering and grouping express
+    the structure. Best for platform / system architecture overviews.
+
+    Args:
+        chart_id: The chart id (create a blank flowchart first).
+        page_id: The chart definitionId (canvas page id).
+        title: Diagram title shown in the dark title bar.
+        layers: Each layer {"name": "层名" (optional left label),
+                "modules": ["模块A", "模块B", ...]}.
+    """
+    client = _get_client()
+    try:
+        client.draw_layered_arch(chart_id, page_id, title, layers)
+    except ProcessOnAuthError as e:
+        return f"认证失败：{e.msg}。"
+    except ProcessOnError as e:
+        return f"画图失败：{e.msg}"
+    except Exception as e:
+        return f"画图失败：{e}"
+    return (f"已绘制分层架构图：{title}（{len(layers)} 层）。\n"
+            f"打开查看：{client.WEB_BASE}/diagraming/{chart_id}")
+
+
+@mcp.tool()
 def processon_draw_mindmap(
     title: str,
     nodes: list,
