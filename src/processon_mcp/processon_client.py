@@ -1316,7 +1316,9 @@ class ProcessOnClient:
         z = 1
 
         # measure total height
-        cursor = margin + 45  # after title bar
+        title_h = 45
+        title_gap = layer_gap  # gap between title bar and first layer
+        cursor = margin + title_h + title_gap
         layer_rows = []
         for layer in layers:
             has_label = bool(layer.get("name"))
@@ -1361,8 +1363,8 @@ class ProcessOnClient:
 
         # layer background tints (rotating palette) + dark label + bordered modules
         LAYER_BG = ["235,241,252", "232,245,233", "255,243,224", "240,240,245"]
-        LAYER_LBL = ["91,121,232", "67,160,71", "230,140,50", "120,120,140"]
-        y = margin + 45
+        LAYER_LBL = ["55,80,130", "67,160,71", "230,140,50", "120,120,140"]
+        y = margin + title_h + title_gap
         for li, (layer, has_label, content_x, content_w, mw, gap, lh) in enumerate(layer_rows):
             bg = LAYER_BG[li % len(LAYER_BG)]
             lblc = LAYER_LBL[li % len(LAYER_LBL)]
