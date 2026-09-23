@@ -1359,10 +1359,27 @@ class ProcessOnClient:
                              "vAlign": "middle"}
         shapes.append(tbar); z += 1
 
-        # layers
+        # layer background tints (rotating palette) + dark label + bordered modules
+        LAYER_BG = ["235,241,252", "232,245,233", "255,243,224", "240,240,245"]
+        LAYER_LBL = ["91,121,232", "67,160,71", "230,140,50", "120,120,140"]
         y = margin + 45
-        for layer, has_label, content_x, content_w, mw, gap, lh in layer_rows:
-            # optional left layer label (light tint, vertical centered text)
+        for li, (layer, has_label, content_x, content_w, mw, gap, lh) in enumerate(layer_rows):
+            bg = LAYER_BG[li % len(LAYER_BG)]
+            lblc = LAYER_LBL[li % len(LAYER_LBL)]
+            # full-width layer background band (subtle tint, no border)
+            band = self._shape("rectangle", "basic", "", margin, y,
+                               inner_w, lh,
+                               [{"actions": [
+                                   {"action": "move", "x": "0", "y": "0"},
+                                   {"action": "line", "x": "w", "y": "0"},
+                                   {"action": "line", "x": "w", "y": "h"},
+                                   {"action": "line", "x": "0", "y": "h"},
+                                   {"action": "close", "y": "0"}]}], z)
+            band["fillStyle"] = {"color": bg, "type": "solid"}
+            band["lineStyle"] = {"lineColor": "none", "lineWidth": 0}
+            shapes.append(band); z += 1
+
+            # left layer label (dark solid block, white text)
             if has_label:
                 lbl = self._shape("rectangle", "basic", layer["name"],
                                   margin, y, left_label_width, lh,
@@ -1372,20 +1389,22 @@ class ProcessOnClient:
                                       {"action": "line", "x": "w", "y": "h"},
                                       {"action": "line", "x": "0", "y": "h"},
                                       {"action": "close", "y": "0"}]}], z)
-                lbl["fillStyle"] = {"color": "235,241,252", "type": "solid"}
+                lbl["fillStyle"] = {"color": lblc, "type": "solid"}
                 lbl["lineStyle"] = {"lineColor": "none", "lineWidth": 0}
-                lbl["fontStyle"] = {"color": "60,90,180", "size": 14,
+                lbl["fontStyle"] = {"color": "255,255,255", "size": 14,
                                     "textAlign": "center", "bold": True,
                                     "vAlign": "middle"}
                 shapes.append(lbl); z += 1
 
-            # rounded modules
+            # rounded modules with a thin border so they read as distinct blocks
             mods = layer.get("modules", [])
             mx = content_x
             for m in mods:
-                shapes.append(self.make_roundrect(
-                    m, mx, y + layer_pad, mw, module_h, zindex=z))
-                z += 1
+                mod = self.make_roundrect(
+                    m, mx, y + layer_pad, mw, module_h, zindex=z)
+                mod["lineStyle"] = {"lineColor": "150,160,180",
+                                    "lineWidth": 1}
+                shapes.append(mod); z += 1
                 mx += mw + gap
             y += lh + layer_gap
 
