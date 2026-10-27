@@ -979,8 +979,27 @@ class ProcessOnClient:
         sy_c = src["props"]["y"] + src["props"]["h"] / 2
         dx_c = dst["props"]["x"] + dst["props"]["w"] / 2
         dy_c = dst["props"]["y"] + dst["props"]["h"] / 2
-        # Decide sides by relative centre position (layered layout is vertical).
-        if dy_c > sy_c + 4:                       # dst below src
+        # Choose the shortest-direction anchor pair. When dst is in a different
+        # row but far to the side, a bottom->top elbow drops all the way down and
+        # across a huge loop; prefer side-to-side (horizontal) routing instead.
+        dx_off = abs(dx_c - sx_c)
+        dy_off = abs(dy_c - sy_c)
+        side_mode = False
+        if dy_off > 4 and dx_off > dy_off * 0.6:
+            side_mode = True
+        if side_mode:
+            # horizontal (side) connection even across rows
+            if dx_c >= sx_c:
+                sx, sy = src["props"]["x"] + src["props"]["w"], sy_c
+                from_angle = 0.0
+                dx, dy = dst["props"]["x"], dy_c
+                to_angle = math.pi
+            else:
+                sx, sy = src["props"]["x"], sy_c
+                from_angle = math.pi
+                dx, dy = dst["props"]["x"] + dst["props"]["w"], dy_c
+                to_angle = 0.0
+        elif dy_c > sy_c + 4:                     # dst below src
             sx, sy = sx_c, src["props"]["y"] + src["props"]["h"]
             from_angle = 3 * math.pi / 2
             dx, dy = dx_c, dst["props"]["y"]
@@ -1018,13 +1037,19 @@ class ProcessOnClient:
             "textBlock": [],
         }
         if link_type == "broken":
-            # Elbow path: drop from src's edge to a lane in the gap just below
-            # src (not the midpoint, which lands on a middle layer's boxes),
-            # run horizontally to dst's x, then drop to dst's edge.
-            span = dy - sy
-            mid_y = sy + min(30.0, span * 0.25) if span > 0 else sy
-            linker["points"] = [{"x": sx, "y": mid_y},
-                                {"x": dx, "y": mid_y}]
+            if side_mode:
+                # horizontal-first elbow: out from src side, then vertical to
+                # dst row. Mid x is halfway between the two side edges.
+                mid_x = sx + (dx - sx) * 0.5
+                linker["points"] = [{"x": mid_x, "y": sy},
+                                    {"x": mid_x, "y": dy}]
+            else:
+                # vertical-first elbow: drop from src's bottom edge to a lane
+                # in the gap just below src, run horizontally to dst's x.
+                span = dy - sy
+                mid_y = sy + min(30.0, span * 0.25) if span > 0 else sy
+                linker["points"] = [{"x": sx, "y": mid_y},
+                                    {"x": dx, "y": mid_y}]
         return linker
 
     def _avoid_boxes_on_link(self, link: Dict[str, Any],
