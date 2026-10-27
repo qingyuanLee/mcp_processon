@@ -498,8 +498,14 @@ def processon_draw_flowchart(
     except ProcessOnError as e:
         return f"画图失败：{e.msg}"
     themed = f"，应用主题 {theme}" if theme else ""
+    share = ""
+    try:
+        info = client.share_chart(chart_id, permanent=True)
+        share = f"\n公开访问链接：{info['shareUrl']}"
+    except Exception:
+        pass
     return (f"已向图表写入 {len(nodes)} 个节点、{len(edges)} 条连线{themed}。\n"
-            f"打开查看：{client.WEB_BASE}/diagraming/{chart_id}")
+            f"编辑链接：{client.WEB_BASE}/diagraming/{chart_id}{share}")
 
 
 @mcp.tool()
@@ -531,8 +537,14 @@ def processon_draw_layered_arch(
         return f"画图失败：{e.msg}"
     except Exception as e:
         return f"画图失败：{e}"
+    share = ""
+    try:
+        info = client.share_chart(chart_id, permanent=True)
+        share = f"\n公开访问链接：{info['shareUrl']}"
+    except Exception:
+        pass
     return (f"已绘制分层架构图：{title}（{len(layers)} 层）。\n"
-            f"打开查看：{client.WEB_BASE}/diagraming/{chart_id}")
+            f"编辑链接：{client.WEB_BASE}/diagraming/{chart_id}{share}")
 
 
 @mcp.tool()
