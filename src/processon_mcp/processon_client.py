@@ -1070,6 +1070,13 @@ class ProcessOnClient:
                 bid = b.get("id")
                 if bid == from_id or bid == to_id:
                     continue
+                # Skip dashed container/group frames — they are semi-transparent
+                # background layers; a connector passing through them is fine.
+                # Counting them as obstacles makes vertical chains inside a group
+                # get pushed to weird positions (the frame covers the whole group).
+                ls = b.get("lineStyle", {})
+                if ls.get("lineStyle") == "dashed":
+                    continue
                 bp = b.get("props", b)
                 bx, by, bw, bh = bp["x"], bp["y"], bp["w"], bp["h"]
                 # horizontal line at y overlaps this box vertically AND horizontally
